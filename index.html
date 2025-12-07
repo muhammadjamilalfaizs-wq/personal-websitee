@@ -3,592 +3,536 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#4361ee">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Personal Website">
-    
     <title>Personal Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* SEMUA STYLE SEBELUMNYA TETAP... */
-        /* Hanya tambah style untuk refresh button */
-        
-        /* Refresh Button di Header */
-        .refresh-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        /* === RESET === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
         
-        .refresh-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+        /* === BODY === */
+        body {
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
         }
         
-        .refresh-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(30deg);
-        }
-        
-        .refresh-btn.refreshing {
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Pull to Refresh */
-        #pull-to-refresh {
-            position: fixed;
-            top: -60px;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            transition: top 0.3s ease;
-        }
-        
-        #pull-to-refresh.show {
-            top: 0;
-        }
-        
-        /* Auto Refresh Timer */
-        .auto-refresh-info {
-            position: fixed;
-            bottom: 70px;
-            right: 10px;
-            background: rgba(67, 97, 238, 0.9);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            z-index: 999;
-            display: none;
-        }
-        
-        /* Untuk PWA fullscreen, tambah refresh di menu */
-        .pwa-menu {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-        }
-        
-        .pwa-menu-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        
-        .pwa-menu-dropdown {
-            position: absolute;
-            top: 50px;
-            right: 0;
+        /* === CONTAINER === */
+        .container {
+            max-width: 100%;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            display: none;
-            min-width: 150px;
-            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .pwa-menu-dropdown.show {
+        /* === HEADER === */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4361ee;
+        }
+        
+        h1 {
+            color: #4361ee;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* === TABS === */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            border: none;
+            background: #e9ecef;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .tab-btn.active {
+            background: #4361ee;
+            color: white;
+        }
+        
+        /* === CONTENT === */
+        .tab-content {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* === FORM === */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #4361ee;
+            font-size: 14px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        input:focus, select:focus {
+            border-color: #4361ee;
+            outline: none;
+        }
+        
+        /* === BUTTONS === */
+        .btn {
+            background: #4361ee;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #3a0ca3;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+        }
+        
+        /* === CARD === */
+        .card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4361ee;
+        }
+        
+        .card h3 {
+            color: #4361ee;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .card .amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        /* === INSTALL PROMPT === */
+        .install-prompt {
+            background: #e3f2fd;
+            border: 2px dashed #4361ee;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .install-prompt.show {
             display: block;
         }
         
-        .pwa-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .install-btn {
+            background: #4cc9f0;
+            color: white;
             border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
             cursor: pointer;
-            color: var(--dark);
-            gap: 10px;
-            border-bottom: 1px solid var(--gray-light);
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         
-        .pwa-menu-item:last-child {
-            border-bottom: none;
-        }
-        
-        .pwa-menu-item:hover {
-            background: var(--light);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .refresh-container {
-                top: 15px;
-                right: 15px;
+        /* === RESPONSIVE === */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+                max-width: 800px;
+                margin: 0 auto;
             }
             
-            .refresh-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-            
-            .pwa-menu {
-                top: 15px;
-                right: 60px;
+            h1 {
+                font-size: 32px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading">
-        <div class="loader"></div>
-        <h2 style="color: white;">Personal Website</h2>
-        <p style="color: white; margin-top: 10px;">Loading...</p>
-    </div>
-    
-    <!-- Pull to Refresh Indicator -->
-    <div id="pull-to-refresh">
-        <i class="fas fa-sync-alt fa-spin" style="margin-right: 10px;"></i>
-        Me-refresh data...
-    </div>
-    
-    <!-- Auto Refresh Info -->
-    <div class="auto-refresh-info" id="autoRefreshInfo">
-        Auto refresh: <span id="refreshTimer">30</span>s
-    </div>
-    
-    <!-- PWA Menu -->
-    <div class="pwa-menu">
-        <button class="pwa-menu-btn" id="pwaMenuBtn">
-            <i class="fas fa-ellipsis-v"></i>
-        </button>
-        <div class="pwa-menu-dropdown" id="pwaMenuDropdown">
-            <button class="pwa-menu-item" id="menuRefresh">
-                <i class="fas fa-sync-alt"></i> Refresh Data
-            </button>
-            <button class="pwa-menu-item" id="menuAutoRefresh">
-                <i class="fas fa-redo"></i> <span id="autoRefreshText">Auto Refresh: OFF</span>
-            </button>
-            <button class="pwa-menu-item" onclick="exportAllData()">
-                <i class="fas fa-download"></i> Export Data
-            </button>
-            <button class="pwa-menu-item" onclick="clearAllData()">
-                <i class="fas fa-trash"></i> Hapus Data
-            </button>
-            <button class="pwa-menu-item" onclick="location.reload()">
-                <i class="fas fa-power-off"></i> Reload Aplikasi
-            </button>
-        </div>
-    </div>
-    
-    <!-- Install Prompt -->
-    <div id="installPrompt">
-        <h3><i class="fas fa-download"></i> Install App</h3>
-        <p>Install aplikasi ini ke homescreen untuk akses lebih cepat!</p>
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button id="installCancel" class="btn" style="flex: 1; background: #ccc;">Nanti</button>
-            <button id="installConfirm" class="btn" style="flex: 1;">Install</button>
-        </div>
-    </div>
-    
-    <!-- Header dengan Refresh Button -->
-    <header>
-        <div class="refresh-container">
-            <button class="refresh-btn" id="refreshButton" title="Refresh data">
-                <i class="fas fa-sync-alt"></i>
-            </button>
-        </div>
-        <div class="container">
-            <h1><i class="fas fa-user-circle"></i> Personal Website</h1>
-            <p>Kelola keuangan dan waktu Anda dengan lebih efektif dan efisien</p>
-        </div>
-    </header>
-    
-    <!-- Konten lainnya sama seperti sebelumnya... -->
-    <!-- Money Management Tab -->
     <div class="container">
-        <!-- ... SEMUA KODE TAB DAN FORM SEBELUMNYA TETAP ... -->
-        <!-- (Kode dari versi sebelumnya, terlalu panjang untuk ditampilkan ulang) -->
+        <!-- HEADER -->
+        <header>
+            <h1><i class="fas fa-user-circle"></i> Personal Website</h1>
+            <p class="subtitle">Kelola keuangan dan waktu dengan mudah</p>
+        </header>
         
-        <!-- Footer -->
-        <footer>
-            <p>Personal Website &copy; 2023 | 
-                <button class="btn-small" id="installBtn" style="background: #4cc9f0; color: white;">
-                    <i class="fas fa-plus-circle"></i> Tambah ke Homescreen
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="money">
+                <i class="fas fa-money-bill-wave"></i> Uang
+            </button>
+            <button class="tab-btn" data-tab="time">
+                <i class="fas fa-clock"></i> Waktu
+            </button>
+            <button class="tab-btn" data-tab="data">
+                <i class="fas fa-database"></i> Data
+            </button>
+        </div>
+        
+        <!-- MONEY MANAGEMENT -->
+        <div class="tab-content active" id="money">
+            <h2 style="color:#4361ee; margin-bottom:15px; font-size:18px;">
+                <i class="fas fa-coins"></i> Kelola Keuangan
+            </h2>
+            
+            <!-- PEMASUKAN -->
+            <div class="card">
+                <h3><i class="fas fa-arrow-down" style="color:#28a745;"></i> Pemasukan</h3>
+                <div class="form-group">
+                    <label>Dari mana?</label>
+                    <select>
+                        <option value="">Pilih sumber</option>
+                        <option value="gaji">Gaji</option>
+                        <option value="bisnis">Bisnis</option>
+                        <option value="investasi">Investasi</option>
+                        <option value="lain">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Jumlah (Rp)</label>
+                    <input type="number" placeholder="Contoh: 1000000">
+                </div>
+                <button class="btn btn-success">
+                    <i class="fas fa-save"></i> Simpan Pemasukan
                 </button>
-                <button class="btn-small" id="manualRefreshBtn" style="background: var(--success); color: white; margin-left: 5px;">
-                    <i class="fas fa-sync-alt"></i> Refresh
+            </div>
+            
+            <!-- PENGELUARAN -->
+            <div class="card">
+                <h3><i class="fas fa-arrow-up" style="color:#dc3545;"></i> Pengeluaran</h3>
+                <div class="form-group">
+                    <label>Untuk apa?</label>
+                    <input type="text" placeholder="Contoh: Beli makanan">
+                </div>
+                <div class="form-group">
+                    <label>Jumlah (Rp)</label>
+                    <input type="number" placeholder="Contoh: 50000">
+                </div>
+                <button class="btn btn-warning">
+                    <i class="fas fa-save"></i> Simpan Pengeluaran
                 </button>
+            </div>
+            
+            <!-- TABUNGAN -->
+            <div class="card">
+                <h3><i class="fas fa-piggy-bank" style="color:#4361ee;"></i> Tabungan</h3>
+                <div class="form-group">
+                    <label>Jumlah ditabung (Rp)</label>
+                    <input type="number" placeholder="Contoh: 200000">
+                </div>
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Tabungan
+                </button>
+            </div>
+        </div>
+        
+        <!-- TIME MANAGEMENT -->
+        <div class="tab-content" id="time">
+            <h2 style="color:#4361ee; margin-bottom:15px; font-size:18px;">
+                <i class="fas fa-clock"></i> Kelola Waktu
+            </h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-briefcase"></i> Jam Kerja</h3>
+                <div class="form-group">
+                    <label>Hari Kerja</label>
+                    <select multiple style="height:100px;">
+                        <option value="senin">Senin</option>
+                        <option value="selasa">Selasa</option>
+                        <option value="rabu">Rabu</option>
+                        <option value="kamis">Kamis</option>
+                        <option value="jumat">Jumat</option>
+                        <option value="sabtu">Sabtu</option>
+                        <option value="minggu">Minggu</option>
+                    </select>
+                    <small style="color:#666; font-size:12px;">Tahan Ctrl untuk pilih banyak</small>
+                </div>
+                <div class="form-group">
+                    <label>Jam Mulai</label>
+                    <input type="time" value="08:00">
+                </div>
+                <div class="form-group">
+                    <label>Jam Selesai</label>
+                    <input type="time" value="17:00">
+                </div>
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Jadwal
+                </button>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> Jadwal Hari Ini</h3>
+                <p><strong>08:00 - 17:00</strong> : Kerja</p>
+                <p><strong>19:00 - 21:00</strong> : Kuliah</p>
+            </div>
+        </div>
+        
+        <!-- DATA VIEW -->
+        <div class="tab-content" id="data">
+            <h2 style="color:#4361ee; margin-bottom:15px; font-size:18px;">
+                <i class="fas fa-database"></i> Data & Ringkasan
+            </h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-chart-bar"></i> Ringkasan Keuangan</h3>
+                <p>Total Pemasukan: <strong>Rp 5.250.000</strong></p>
+                <p>Total Pengeluaran: <strong>Rp 3.800.000</strong></p>
+                <div class="amount" style="color:#28a745;">
+                    Saldo: Rp 1.450.000
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-download"></i> Export Data</h3>
+                <p>Simpan data ke file:</p>
+                <button class="btn" style="background:#28a745;">
+                    <i class="fas fa-file-excel"></i> Export ke Excel
+                </button>
+                <button class="btn" style="background:#6c757d; margin-top:10px;">
+                    <i class="fas fa-file-pdf"></i> Export ke PDF
+                </button>
+            </div>
+        </div>
+        
+        <!-- INSTALL PROMPT -->
+        <div class="install-prompt" id="installPrompt">
+            <h3 style="color:#4361ee; margin-bottom:10px;">
+                <i class="fas fa-download"></i> Install App
+            </h3>
+            <p style="color:#666; margin-bottom:15px;">
+                Install ke homescreen untuk akses cepat!
             </p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">
-                Terakhir refresh: <span id="lastRefreshTime">-</span> | 
-                Auto refresh: <span id="autoRefreshStatus">OFF</span>
+            <div style="display:flex; gap:10px;">
+                <button class="install-btn" id="cancelInstall" 
+                        style="background:#ccc; color:#333;">
+                    Nanti
+                </button>
+                <button class="install-btn" id="confirmInstall"
+                        style="background:#4361ee;">
+                    Install
+                </button>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <p>Personal Website &copy; 2023</p>
+            <button class="install-btn" id="showInstallBtn">
+                <i class="fas fa-plus-circle"></i> Pasang di Homescreen
+            </button>
+            <p style="margin-top:10px; font-size:11px;">
+                Data tersimpan di browser Anda
             </p>
         </footer>
     </div>
 
     <script>
-        // ===== VARIABEL REFRESH =====
-        let refreshInterval = null;
-        let autoRefreshEnabled = false;
-        let autoRefreshTime = 30; // detik
-        let refreshTimer = autoRefreshTime;
-        let lastRefresh = null;
-        let isRefreshing = false;
-        let startY = 0;
-        let pullStart = 0;
-        
-        // ===== INITIALIZATION =====
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize semua fungsi sebelumnya...
-            initializeUI();
-            loadAllData();
-            requestNotificationPermission();
-            setCurrentDateTime();
-            setupServiceWorker();
-            setupInstallPrompt();
-            startAlarmChecker();
-            
-            // Setup refresh features
-            setupRefreshFeatures();
-            
-            // Setup pull to refresh
-            setupPullToRefresh();
-            
-            // Hide loading screen
-            setTimeout(() => {
-                document.getElementById('loading').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loading').style.display = 'none';
-                }, 500);
-            }, 1000);
-            
-            // Update last refresh time
-            updateLastRefreshTime();
+        // ===== SIMPLE TAB SYSTEM =====
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Hapus active dari semua
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Tambah active ke yang diklik
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
         });
         
-        // ===== SETUP REFRESH FEATURES =====
-        function setupRefreshFeatures() {
-            // Manual refresh button
-            document.getElementById('refreshButton').addEventListener('click', manualRefresh);
-            document.getElementById('manualRefreshBtn').addEventListener('click', manualRefresh);
-            document.getElementById('menuRefresh').addEventListener('click', manualRefresh);
-            
-            // Auto refresh toggle
-            document.getElementById('menuAutoRefresh').addEventListener('click', toggleAutoRefresh);
-            
-            // PWA menu
-            document.getElementById('pwaMenuBtn').addEventListener('click', togglePwaMenu);
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.pwa-menu')) {
-                    document.getElementById('pwaMenuDropdown').classList.remove('show');
-                }
-            });
-            
-            // Check if we're in PWA mode
-            if (isPWAInstalled()) {
-                document.getElementById('autoRefreshInfo').style.display = 'block';
-                document.querySelector('.pwa-menu').style.display = 'block';
-                updateAutoRefreshUI();
+        // ===== SIMULASI SIMPAN DATA =====
+        document.querySelectorAll('.btn').forEach(button => {
+            if (button.textContent.includes('Simpan')) {
+                button.addEventListener('click', function() {
+                    alert('✅ Data berhasil disimpan!');
+                    // Data akan disimpan di localStorage nanti
+                });
             }
-        }
+        });
         
-        function setupPullToRefresh() {
-            let touchStartY = 0;
-            let touchMoveY = 0;
-            let isPulling = false;
-            
-            document.addEventListener('touchstart', (e) => {
-                // Only trigger pull to refresh at the top of the page
-                if (window.scrollY === 0) {
-                    touchStartY = e.touches[0].clientY;
-                    isPulling = true;
-                    pullStart = Date.now();
-                }
-            });
-            
-            document.addEventListener('touchmove', (e) => {
-                if (!isPulling) return;
-                
-                touchMoveY = e.touches[0].clientY;
-                const pullDistance = touchMoveY - touchStartY;
-                
-                // Only show pull indicator if pulling down
-                if (pullDistance > 0) {
-                    e.preventDefault();
-                    const indicator = document.getElementById('pull-to-refresh');
-                    indicator.style.top = Math.min(pullDistance, 60) - 60 + 'px';
-                    
-                    // If pulled enough, show loading state
-                    if (pullDistance > 100) {
-                        indicator.classList.add('show');
-                    }
-                }
-            });
-            
-            document.addEventListener('touchend', (e) => {
-                if (!isPulling) return;
-                
-                const touchEndY = e.changedTouches[0].clientY;
-                const pullDistance = touchEndY - touchStartY;
-                const pullDuration = Date.now() - pullStart;
-                
-                // Reset pull indicator
-                document.getElementById('pull-to-refresh').style.top = '-60px';
-                document.getElementById('pull-to-refresh').classList.remove('show');
-                
-                // Trigger refresh if pulled enough
-                if (pullDistance > 100 && pullDuration < 1000) {
-                    manualRefresh();
-                }
-                
-                isPulling = false;
-            });
-        }
+        // ===== INSTALL PWA =====
+        let deferredPrompt = null;
         
-        // ===== REFRESH FUNCTIONS =====
-        function manualRefresh() {
-            if (isRefreshing) return;
-            
-            isRefreshing = true;
-            const refreshBtn = document.getElementById('refreshButton');
-            refreshBtn.classList.add('refreshing');
-            
-            // Simulate loading delay
-            setTimeout(() => {
-                // Reload data from localStorage
-                loadAllData();
-                
-                // Update UI
-                refreshBtn.classList.remove('refreshing');
-                isRefreshing = false;
-                lastRefresh = new Date();
-                updateLastRefreshTime();
-                
-                // Show success message
-                showToast('Data berhasil di-refresh!', 'success');
-                
-                // Reset auto-refresh timer
-                if (autoRefreshEnabled) {
-                    refreshTimer = autoRefreshTime;
-                    updateAutoRefreshTimer();
-                }
-            }, 1000);
-        }
+        // Tampilkan tombol install setelah 3 detik
+        setTimeout(() => {
+            document.getElementById('showInstallBtn').style.display = 'inline-flex';
+        }, 3000);
         
-        function toggleAutoRefresh() {
-            autoRefreshEnabled = !autoRefreshEnabled;
-            
-            if (autoRefreshEnabled) {
-                startAutoRefresh();
-                showToast('Auto refresh diaktifkan setiap ' + autoRefreshTime + ' detik', 'success');
+        // Tombol "Pasang di Homescreen"
+        document.getElementById('showInstallBtn').addEventListener('click', function() {
+            document.getElementById('installPrompt').classList.add('show');
+        });
+        
+        // Tombol "Nanti" di install prompt
+        document.getElementById('cancelInstall').addEventListener('click', function() {
+            document.getElementById('installPrompt').classList.remove('show');
+        });
+        
+        // Tombol "Install" di install prompt
+        document.getElementById('confirmInstall').addEventListener('click', function() {
+            if (deferredPrompt) {
+                // Untuk Android Chrome
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(() => {
+                    deferredPrompt = null;
+                });
+            } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Untuk iOS
+                alert('📱 Cara install di iPhone:\n\n1. Buka di Safari\n2. Tap tombol share (□ dengan ↑)\n3. Scroll ke bawah\n4. Pilih "Add to Home Screen"');
             } else {
-                stopAutoRefresh();
-                showToast('Auto refresh dimatikan', 'warning');
+                // Untuk browser lain
+                alert('💻 Buka di Chrome/Edge, lalu:\n1. Klik menu (⋮)\n2. Pilih "Install app" atau\n3. "Add to Home Screen"');
             }
             
-            updateAutoRefreshUI();
-        }
+            document.getElementById('installPrompt').classList.remove('show');
+        });
         
-        function startAutoRefresh() {
-            if (refreshInterval) clearInterval(refreshInterval);
-            
-            refreshTimer = autoRefreshTime;
-            updateAutoRefreshTimer();
-            
-            refreshInterval = setInterval(() => {
-                refreshTimer--;
-                updateAutoRefreshTimer();
-                
-                if (refreshTimer <= 0) {
-                    manualRefresh();
-                    refreshTimer = autoRefreshTime;
-                }
-            }, 1000);
-        }
+        // Tangkap event install prompt dari browser
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('showInstallBtn').style.display = 'inline-flex';
+        });
         
-        function stopAutoRefresh() {
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
-                refreshInterval = null;
-            }
-            document.getElementById('autoRefreshInfo').style.display = 'none';
-        }
-        
-        function updateAutoRefreshTimer() {
-            const timerElement = document.getElementById('refreshTimer');
-            const infoElement = document.getElementById('autoRefreshInfo');
-            
-            if (timerElement) timerElement.textContent = refreshTimer;
-            if (infoElement && autoRefreshEnabled) {
-                infoElement.style.display = 'block';
-            }
-        }
-        
-        function updateAutoRefreshUI() {
-            const statusElement = document.getElementById('autoRefreshStatus');
-            const textElement = document.getElementById('autoRefreshText');
-            
-            if (statusElement) {
-                statusElement.textContent = autoRefreshEnabled ? 'ON' : 'OFF';
-                statusElement.style.color = autoRefreshEnabled ? 'var(--success)' : 'var(--danger)';
-            }
-            
-            if (textElement) {
-                textElement.textContent = 'Auto Refresh: ' + (autoRefreshEnabled ? 'ON' : 'OFF');
-            }
-        }
-        
-        function updateLastRefreshTime() {
-            const element = document.getElementById('lastRefreshTime');
-            if (!element) return;
-            
-            if (!lastRefresh) {
-                lastRefresh = new Date();
-            }
-            
-            const now = new Date();
-            const diffMs = now - lastRefresh;
-            const diffMins = Math.floor(diffMs / 60000);
-            const diffSecs = Math.floor((diffMs % 60000) / 1000);
-            
-            if (diffMins > 0) {
-                element.textContent = diffMins + ' menit lalu';
-            } else {
-                element.textContent = diffSecs + ' detik lalu';
-            }
-            
-            element.title = 'Terakhir: ' + lastRefresh.toLocaleString('id-ID');
-        }
-        
-        function togglePwaMenu() {
-            const dropdown = document.getElementById('pwaMenuDropdown');
-            dropdown.classList.toggle('show');
-        }
-        
-        // ===== UTILITY FUNCTIONS =====
-        function showToast(message, type = 'info') {
-            // Remove existing toast
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) existingToast.remove();
-            
-            // Create toast
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer;">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            // Style toast
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#4ade80' : type === 'error' ? '#ef4444' : '#4361ee'};
-                color: white;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                min-width: 300px;
-                max-width: 400px;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            // Add animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            document.body.appendChild(toast);
-            
-            // Auto remove after 3 seconds
-            setTimeout(() => {
-                if (toast.parentElement) {
-                    toast.style.animation = 'slideOut 0.3s ease';
-                    setTimeout(() => toast.remove(), 300);
-                }
-            }, 3000);
-        }
-        
-        // ===== PWA DETECTION =====
-        function isPWAInstalled() {
+        // Cek jika sudah diinstall sebagai PWA
+        function isInstalled() {
             return window.matchMedia('(display-mode: standalone)').matches || 
-                   window.navigator.standalone === true ||
-                   document.referrer.includes('android-app://');
+                   window.navigator.standalone === true;
         }
         
-        // ===== SEMUA FUNGSI SEBELUMNYA (loadAllData, saveIncome, dll) =====
-        // ... (Semua fungsi dari kode sebelumnya tetap ada di sini)
-        // Untuk menghemat ruang, saya tidak menulis ulang semua fungsi
-        // Tapi semua fungsi dari kode sebelumnya harus ada
-        
-        // Contoh: Fungsi loadAllData harus ada
-        function loadAllData() {
-            // Implementasi dari kode sebelumnya
-            console.log('Loading all data...');
-            // ... kode lengkap dari sebelumnya
+        // Sembunyikan tombol install jika sudah diinstall
+        if (isInstalled()) {
+            document.getElementById('showInstallBtn').style.display = 'none';
         }
         
-        // Fungsi lainnya juga harus ada...
-        
-        // Update last refresh time periodically
-        setInterval(updateLastRefreshTime, 30000); // Update every 30 seconds
-        
-        // Initialize auto-refresh if PWA
-        if (isPWAInstalled()) {
-            // Auto enable refresh in PWA mode
-            setTimeout(() => {
-                autoRefreshEnabled = true;
-                startAutoRefresh();
-                updateAutoRefreshUI();
-            }, 5000);
+        // ===== SIMPAN DATA KE LOCALSTORAGE =====
+        // Contoh: Simpan pemasukan
+        function saveIncome() {
+            const source = document.querySelector('#money select').value;
+            const amount = document.querySelector('#money input[type="number"]').value;
+            
+            if (!source || !amount) {
+                alert('Isi sumber dan jumlah dulu!');
+                return;
+            }
+            
+            // Ambil data lama
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            
+            // Tambah data baru
+            incomes.push({
+                id: Date.now(),
+                source: source,
+                amount: parseInt(amount),
+                date: new Date().toISOString()
+            });
+            
+            // Simpan ke localStorage
+            localStorage.setItem('incomes', JSON.stringify(incomes));
+            
+            alert('Pemasukan Rp ' + amount + ' dari ' + source + ' disimpan!');
         }
+        
+        // Pasang event listener untuk tombol simpan pemasukan
+        document.querySelector('#money .btn-success').addEventListener('click', saveIncome);
+        
+        // ===== TAMPILKAN DATA DARI LOCALSTORAGE =====
+        function loadData() {
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            
+            if (incomes.length > 0) {
+                console.log('Data tersimpan:', incomes);
+                // Bisa ditampilkan di halaman nanti
+            }
+        }
+        
+        // Load data saat halaman dibuka
+        window.addEventListener('load', loadData);
     </script>
 </body>
 </html>
