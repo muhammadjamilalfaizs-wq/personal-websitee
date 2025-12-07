@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#4361ee">
-    <!-- HAPUS INI: -->
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
-    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
-    <!-- <meta name="apple-mobile-web-app-title" content="Personal Website"> -->
-    
-    <!-- GANTI DENGAN INI: -->
-    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Personal Website">
     
     <title>Personal Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -480,26 +474,26 @@
             }
         }
         
-        /* Loading Screen - DIPERBAIKI */
+        /* Loading Screen */
         #loading {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: white;
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s, visibility 0.5s;
+            transition: opacity 0.5s;
         }
         
         .loader {
             width: 50px;
             height: 50px;
-            border: 5px solid var(--primary);
+            border: 5px solid white;
             border-radius: 50%;
             border-top-color: transparent;
             animation: spin 1s linear infinite;
@@ -533,141 +527,15 @@
             from { transform: translateY(100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        
-        /* REFRESH BUTTON - TAMBAH INI */
-        .refresh-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-        
-        .refresh-button.refreshing {
-            animation: spin 1s linear infinite;
-        }
-        
-        /* PWA MENU - TAMBAH INI */
-        .pwa-menu {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-        }
-        
-        .pwa-menu-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        
-        .pwa-menu-dropdown {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            display: none;
-            min-width: 180px;
-            overflow: hidden;
-        }
-        
-        .pwa-menu-dropdown.show {
-            display: block;
-        }
-        
-        .pwa-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            color: var(--dark);
-            gap: 10px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        
-        .pwa-menu-item:last-child {
-            border-bottom: none;
-        }
-        
-        .pwa-menu-item:hover {
-            background: var(--light);
-        }
-        
-        /* Untuk tampilan di homescreen (PWA) */
-        @media (display-mode: standalone) {
-            body {
-                padding-top: 20px;
-            }
-            
-            header {
-                margin-top: 20px;
-            }
-            
-            .refresh-button, .pwa-menu {
-                top: 30px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Loading Screen - SIMPLE -->
+    <!-- Loading Screen -->
     <div id="loading">
         <div class="loader"></div>
-        <h2 style="color: var(--primary);">Personal Website</h2>
-        <p style="color: var(--gray); margin-top: 10px;">Memuat...</p>
+        <h2 style="color: white;">Personal Website</h2>
+        <p style="color: white; margin-top: 10px;">Loading...</p>
     </div>
-    
-    <!-- PWA Menu -->
-    <div class="pwa-menu">
-        <button class="pwa-menu-btn" id="pwaMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="pwa-menu-dropdown" id="pwaMenuDropdown">
-            <button class="pwa-menu-item" id="menuRefresh">
-                <i class="fas fa-sync-alt"></i> Refresh Data
-            </button>
-            <button class="pwa-menu-item" onclick="exportAllData()">
-                <i class="fas fa-download"></i> Export Data
-            </button>
-            <button class="pwa-menu-item" onclick="clearAllData()">
-                <i class="fas fa-trash"></i> Hapus Data
-            </button>
-            <button class="pwa-menu-item" onclick="location.reload(true)">
-                <i class="fas fa-redo"></i> Reload Aplikasi
-            </button>
-            <button class="pwa-menu-item" id="menuInstall">
-                <i class="fas fa-plus-circle"></i> Pasang di Homescreen
-            </button>
-        </div>
-    </div>
-    
-    <!-- Refresh Button -->
-    <button class="refresh-button" id="refreshButton" title="Refresh data">
-        <i class="fas fa-sync-alt"></i>
-    </button>
     
     <!-- Install Prompt -->
     <div id="installPrompt">
@@ -1323,206 +1191,854 @@
     </div>
     
     <script>
-        // ===== PERBAIKAN UTAMA =====
-        // 1. Hapus loading screen dengan benar
-        // 2. Tambah refresh button
-        // 3. Fix PWA install
+        // ===== GLOBAL VARIABLES =====
+        let deferredPrompt = null;
+        let notificationPermission = false;
         
-        // ===== LOADING SCREEN FIX =====
-        // Hapus loading screen segera setelah page load
-        window.addEventListener('load', function() {
-            // Langsung hide loading screen
-            setTimeout(() => {
-                const loading = document.getElementById('loading');
-                if (loading) {
-                    loading.style.opacity = '0';
-                    setTimeout(() => {
-                        loading.style.display = 'none';
-                    }, 500);
-                }
-            }, 500); // Tunggu 0.5 detik saja
-        });
-        
-        // Fallback jika loading screen stuck
-        setTimeout(() => {
-            const loading = document.getElementById('loading');
-            if (loading && loading.style.display !== 'none') {
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500);
-            }
-        }, 3000); // Maksimal 3 detik
-        
-        // ===== REFRESH FUNCTION =====
-        function refreshData() {
-            const refreshBtn = document.getElementById('refreshButton');
-            refreshBtn.classList.add('refreshing');
-            
-            // Simulasi loading
-            setTimeout(() => {
-                // Load ulang data dari localStorage
-                loadAllData();
-                
-                // Update UI
-                refreshBtn.classList.remove('refreshing');
-                
-                // Show notification
-                showNotification('Data berhasil di-refresh!', 'success');
-            }, 1000);
-        }
-        
-        function reloadApp() {
-            if (confirm('Reload aplikasi? Data tidak akan hilang.')) {
-                // Force reload dari server
-                location.reload(true);
-            }
-        }
-        
-        // ===== PWA MENU =====
-        function setupPWAMenu() {
-            const menuBtn = document.getElementById('pwaMenuBtn');
-            const menuDropdown = document.getElementById('pwaMenuDropdown');
-            
-            if (menuBtn && menuDropdown) {
-                menuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    menuDropdown.classList.toggle('show');
-                });
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', () => {
-                    menuDropdown.classList.remove('show');
-                });
-                
-                // Menu items
-                document.getElementById('menuRefresh').addEventListener('click', refreshData);
-                document.getElementById('menuInstall').addEventListener('click', showInstallPrompt);
-            }
-        }
-        
-        // ===== NOTIFICATION HELPER =====
-        function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer;">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            // Style notification
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#4ade80' : '#4361ee'};
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                min-width: 250px;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            // Add animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            document.body.appendChild(notification);
-            
-            // Auto remove after 3 seconds
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.remove();
-                }
-            }, 3000);
-        }
-        
-        // ===== FIXED INITIALIZATION =====
+        // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM Content Loaded');
-            
-            // 1. Setup PWA Menu first
-            setupPWAMenu();
-            
-            // 2. Setup refresh button
-            document.getElementById('refreshButton').addEventListener('click', refreshData);
-            
-            // 3. Initialize UI
+            // Initialize UI
             initializeUI();
             
-            // 4. Load saved data
-            setTimeout(loadAllData, 100);
+            // Load saved data
+            loadAllData();
             
-            // 5. Set current date/time
+            // Request notification permission
+            requestNotificationPermission();
+            
+            // Set current date/time
             setCurrentDateTime();
             
-            // 6. Setup install prompt
+            // Setup service worker for PWA
+            setupServiceWorker();
+            
+            // Check for PWA install prompt
             setupInstallPrompt();
             
-            // 7. Start alarm checker
+            // Start alarm checker
             startAlarmChecker();
             
-            // 8. Check if PWA already installed
-            checkPWAStatus();
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
+            }, 1000);
         });
         
-        // ===== PWA STATUS CHECK =====
-        function checkPWAStatus() {
-            if (isPWAInstalled()) {
-                // Hide install button if already installed
-                document.getElementById('installBtn').style.display = 'none';
-                document.getElementById('menuInstall').style.display = 'none';
+        // ===== UI INITIALIZATION =====
+        function initializeUI() {
+            // Tab switching for desktop
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Tab switching for mobile
+            document.querySelectorAll('.mobile-nav-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.mobile-nav-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Money Management buttons
+            document.getElementById('save-income').addEventListener('click', saveIncome);
+            document.getElementById('save-expense').addEventListener('click', saveExpense);
+            document.getElementById('save-saving').addEventListener('click', saveSaving);
+            
+            // Time Management buttons
+            document.getElementById('save-work').addEventListener('click', saveWorkSchedule);
+            document.getElementById('save-play').addEventListener('click', savePlaySchedule);
+            document.getElementById('save-study').addEventListener('click', saveStudySchedule);
+            
+            // Alarm modal
+            document.getElementById('openAlarmModal').addEventListener('click', () => {
+                document.getElementById('alarmModal').style.display = 'flex';
+                document.getElementById('alarmTime').value = getCurrentDateTimeLocal();
+            });
+            
+            document.getElementById('closeAlarmModal').addEventListener('click', () => {
+                document.getElementById('alarmModal').style.display = 'none';
+            });
+            
+            document.getElementById('saveAlarm').addEventListener('click', saveAlarm);
+            
+            // Integration buttons
+            document.querySelectorAll('.connect-google-calendar').forEach(btn => {
+                btn.addEventListener('click', connectGoogleCalendar);
+            });
+            
+            document.querySelectorAll('.open-alarm-modal').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('alarmModal').style.display = 'flex';
+                });
+            });
+            
+            document.querySelectorAll('.set-google-reminder').forEach(btn => {
+                btn.addEventListener('click', setGoogleReminder);
+            });
+            
+            document.querySelectorAll('.export-to-notes').forEach(btn => {
+                btn.addEventListener('click', exportToAppleNotes);
+            });
+            
+            // Data & Export buttons
+            document.getElementById('export-all').addEventListener('click', exportAllData);
+            document.getElementById('export-income').addEventListener('click', () => exportData('income'));
+            document.getElementById('export-expense').addEventListener('click', () => exportData('expense'));
+            document.getElementById('export-saving').addEventListener('click', () => exportData('saving'));
+            document.getElementById('backup-data').addEventListener('click', backupData);
+            document.getElementById('restore-data').addEventListener('click', restoreData);
+            document.getElementById('clear-data').addEventListener('click', clearAllData);
+            
+            // Install button
+            document.getElementById('installBtn').addEventListener('click', showInstallPrompt);
+            document.getElementById('installConfirm').addEventListener('click', installPWA);
+            document.getElementById('installCancel').addEventListener('click', () => {
+                document.getElementById('installPrompt').classList.remove('show');
+            });
+            
+            // Notification permission
+            document.querySelector('.request-notification')?.addEventListener('click', requestNotificationPermission);
+        }
+        
+        // ===== DATA MANAGEMENT =====
+        function loadAllData() {
+            loadFinanceData();
+            loadScheduleData();
+            loadAlarms();
+            updateStatistics();
+        }
+        
+        function loadFinanceData() {
+            // Load incomes
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            const savings = JSON.parse(localStorage.getItem('savings') || '[]');
+            
+            // Update summary
+            updateFinanceSummary(incomes, expenses, savings);
+            
+            // Update lists
+            updateIncomeList(incomes);
+            updateExpenseList(expenses);
+            updateSavingList(savings);
+        }
+        
+        function loadScheduleData() {
+            const workSchedule = JSON.parse(localStorage.getItem('workSchedule') || '{}');
+            const playSchedule = JSON.parse(localStorage.getItem('playSchedule') || '{}');
+            const studySchedule = JSON.parse(localStorage.getItem('studySchedule') || '{}');
+            
+            // Populate forms
+            if (workSchedule.days) {
+                const select = document.getElementById('work-days');
+                Array.from(select.options).forEach(option => {
+                    option.selected = workSchedule.days.includes(option.value);
+                });
+            }
+            if (workSchedule.start) document.getElementById('work-start').value = workSchedule.start;
+            if (workSchedule.end) document.getElementById('work-end').value = workSchedule.end;
+            
+            if (playSchedule.day) document.getElementById('play-day').value = playSchedule.day;
+            if (playSchedule.start) document.getElementById('play-start').value = playSchedule.start;
+            if (playSchedule.end) document.getElementById('play-end').value = playSchedule.end;
+            
+            if (studySchedule.days) {
+                const select = document.getElementById('study-days');
+                Array.from(select.options).forEach(option => {
+                    option.selected = studySchedule.days.includes(option.value);
+                });
+            }
+            if (studySchedule.start) document.getElementById('study-start').value = studySchedule.start;
+            if (studySchedule.end) document.getElementById('study-end').value = studySchedule.end;
+            if (studySchedule.taskHours) document.getElementById('task-hours').value = studySchedule.taskHours;
+            
+            // Update today's schedule
+            updateTodaySchedule(workSchedule, playSchedule, studySchedule);
+        }
+        
+        function loadAlarms() {
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            updateAlarmList(alarms);
+        }
+        
+        // ===== SAVE FUNCTIONS =====
+        function saveIncome() {
+            const income = {
+                source: document.getElementById('income-source').value,
+                date: document.getElementById('income-date').value,
+                method: document.getElementById('income-method').value,
+                bank: document.getElementById('income-bank').value,
+                amount: parseFloat(document.getElementById('income-amount').value) || 0,
+                notes: document.getElementById('income-notes').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!income.source || !income.amount) {
+                alert('Mohon isi sumber dan jumlah pemasukan');
+                return;
+            }
+            
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            incomes.push(income);
+            localStorage.setItem('incomes', JSON.stringify(incomes));
+            
+            alert('Pemasukan berhasil disimpan!');
+            clearForm('income');
+            loadFinanceData();
+        }
+        
+        function saveExpense() {
+            const expense = {
+                for: document.getElementById('expense-for').value,
+                date: document.getElementById('expense-date').value,
+                method: document.getElementById('expense-method').value,
+                bank: document.getElementById('expense-bank').value,
+                amount: parseFloat(document.getElementById('expense-amount').value) || 0,
+                notes: document.getElementById('expense-notes').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!expense.for || !expense.amount) {
+                alert('Mohon isi tujuan dan jumlah pengeluaran');
+                return;
+            }
+            
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            expenses.push(expense);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            
+            alert('Pengeluaran berhasil disimpan!');
+            clearForm('expense');
+            loadFinanceData();
+        }
+        
+        function saveSaving() {
+            const saving = {
+                type: document.getElementById('saving-type').value,
+                place: document.getElementById('saving-place').value,
+                method: document.getElementById('saving-method').value,
+                amount: parseFloat(document.getElementById('saving-amount').value) || 0,
+                notes: document.getElementById('saving-notes').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!saving.place || !saving.amount) {
+                alert('Mohon isi tempat dan jumlah tabungan/investasi');
+                return;
+            }
+            
+            const savings = JSON.parse(localStorage.getItem('savings') || '[]');
+            savings.push(saving);
+            localStorage.setItem('savings', JSON.stringify(savings));
+            
+            alert('Data tabungan/investasi berhasil disimpan!');
+            clearForm('saving');
+            loadFinanceData();
+        }
+        
+        function saveWorkSchedule() {
+            const workSchedule = {
+                days: Array.from(document.getElementById('work-days').selectedOptions).map(opt => opt.value),
+                start: document.getElementById('work-start').value,
+                end: document.getElementById('work-end').value
+            };
+            
+            localStorage.setItem('workSchedule', JSON.stringify(workSchedule));
+            alert('Jadwal kerja berhasil disimpan!');
+            loadScheduleData();
+        }
+        
+        function savePlaySchedule() {
+            const playSchedule = {
+                day: document.getElementById('play-day').value,
+                start: document.getElementById('play-start').value,
+                end: document.getElementById('play-end').value
+            };
+            
+            localStorage.setItem('playSchedule', JSON.stringify(playSchedule));
+            alert('Jadwal main berhasil disimpan!');
+            loadScheduleData();
+        }
+        
+        function saveStudySchedule() {
+            const studySchedule = {
+                days: Array.from(document.getElementById('study-days').selectedOptions).map(opt => opt.value),
+                start: document.getElementById('study-start').value,
+                end: document.getElementById('study-end').value,
+                taskHours: document.getElementById('task-hours').value
+            };
+            
+            localStorage.setItem('studySchedule', JSON.stringify(studySchedule));
+            alert('Jadwal kuliah & tugas berhasil disimpan!');
+            loadScheduleData();
+        }
+        
+        function saveAlarm() {
+            const alarm = {
+                name: document.getElementById('alarmName').value,
+                time: document.getElementById('alarmTime').value,
+                repeat: document.getElementById('alarmRepeat').value,
+                sound: document.getElementById('alarmSound').value,
+                active: true,
+                id: Date.now()
+            };
+            
+            if (!alarm.name || !alarm.time) {
+                alert('Mohon isi nama dan waktu alarm');
+                return;
+            }
+            
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            alarms.push(alarm);
+            localStorage.setItem('alarms', JSON.stringify(alarms));
+            
+            alert('Alarm berhasil disimpan!');
+            document.getElementById('alarmModal').style.display = 'none';
+            clearForm('alarm');
+            loadAlarms();
+        }
+        
+        // ===== UPDATE FUNCTIONS =====
+        function updateFinanceSummary(incomes, expenses, savings) {
+            let totalIncome = 0;
+            let totalExpense = 0;
+            let totalSaving = 0;
+            let totalInvestment = 0;
+            
+            const now = new Date();
+            const thisMonth = now.getMonth();
+            const thisYear = now.getFullYear();
+            const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            
+            let monthlyIncome = 0;
+            let monthlyExpense = 0;
+            let weeklyIncome = 0;
+            let weeklyExpense = 0;
+            
+            incomes.forEach(income => {
+                totalIncome += income.amount;
+                const incomeDate = new Date(income.date || income.timestamp);
                 
-                // Show refresh button more prominently
-                document.getElementById('refreshButton').style.display = 'flex';
+                if (incomeDate.getMonth() === thisMonth && incomeDate.getFullYear() === thisYear) {
+                    monthlyIncome += income.amount;
+                }
                 
-                // Add PWA-specific styles
-                document.body.classList.add('pwa-mode');
+                if (incomeDate >= oneWeekAgo) {
+                    weeklyIncome += income.amount;
+                }
+            });
+            
+            expenses.forEach(expense => {
+                totalExpense += expense.amount;
+                const expenseDate = new Date(expense.date || expense.timestamp);
+                
+                if (expenseDate.getMonth() === thisMonth && expenseDate.getFullYear() === thisYear) {
+                    monthlyExpense += expense.amount;
+                }
+                
+                if (expenseDate >= oneWeekAgo) {
+                    weeklyExpense += expense.amount;
+                }
+            });
+            
+            savings.forEach(saving => {
+                if (saving.type === 'tabungan') {
+                    totalSaving += saving.amount;
+                } else {
+                    totalInvestment += saving.amount;
+                }
+            });
+            
+            document.getElementById('total-income').textContent = formatCurrency(totalIncome);
+            document.getElementById('total-expense').textContent = formatCurrency(totalExpense);
+            document.getElementById('total-balance').textContent = formatCurrency(totalIncome - totalExpense);
+            document.getElementById('total-saving').textContent = formatCurrency(totalSaving);
+            document.getElementById('total-investment').textContent = formatCurrency(totalInvestment);
+            document.getElementById('monthly-income').textContent = formatCurrency(monthlyIncome);
+            document.getElementById('monthly-expense').textContent = formatCurrency(monthlyExpense);
+            document.getElementById('weekly-income').textContent = formatCurrency(weeklyIncome);
+            document.getElementById('weekly-expense').textContent = formatCurrency(weeklyExpense);
+        }
+        
+        function updateIncomeList(incomes) {
+            const container = document.getElementById('income-list');
+            container.innerHTML = '';
+            
+            if (incomes.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray);">Belum ada data pemasukan</p>';
+                return;
+            }
+            
+            // Show last 5 incomes
+            incomes.slice(-5).reverse().forEach(income => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${income.source}</h4>
+                        <p>${formatDate(income.date || income.timestamp)} • ${formatCurrency(income.amount)}</p>
+                        ${income.notes ? `<p><small>${income.notes}</small></p>` : ''}
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn-small" onclick="editIncome(${income.id || 'null'})">Edit</button>
+                        <button class="btn-small btn-danger" onclick="deleteIncome(${income.id || 'null'})">Hapus</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            document.getElementById('income-count').textContent = incomes.length;
+        }
+        
+        function updateExpenseList(expenses) {
+            const container = document.getElementById('expense-list');
+            container.innerHTML = '';
+            
+            if (expenses.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray);">Belum ada data pengeluaran</p>';
+                return;
+            }
+            
+            // Show last 5 expenses
+            expenses.slice(-5).reverse().forEach(expense => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${expense.for}</h4>
+                        <p>${formatDate(expense.date || expense.timestamp)} • ${formatCurrency(expense.amount)}</p>
+                        ${expense.notes ? `<p><small>${expense.notes}</small></p>` : ''}
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn-small" onclick="editExpense(${expense.id || 'null'})">Edit</button>
+                        <button class="btn-small btn-danger" onclick="deleteExpense(${expense.id || 'null'})">Hapus</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            document.getElementById('expense-count').textContent = expenses.length;
+        }
+        
+        function updateSavingList(savings) {
+            const container = document.getElementById('saving-list');
+            container.innerHTML = '';
+            
+            if (savings.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray);">Belum ada data tabungan</p>';
+                return;
+            }
+            
+            // Show last 5 savings
+            savings.slice(-5).reverse().forEach(saving => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${saving.type === 'tabungan' ? 'Tabungan' : 'Investasi'}: ${saving.place}</h4>
+                        <p>${formatDate(saving.timestamp)} • ${formatCurrency(saving.amount)}</p>
+                        ${saving.notes ? `<p><small>${saving.notes}</small></p>` : ''}
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn-small" onclick="editSaving(${saving.id || 'null'})">Edit</button>
+                        <button class="btn-small btn-danger" onclick="deleteSaving(${saving.id || 'null'})">Hapus</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            document.getElementById('saving-count').textContent = savings.length;
+        }
+        
+        function updateTodaySchedule(work, play, study) {
+            const container = document.getElementById('today-schedule');
+            container.innerHTML = '';
+            
+            const today = new Date();
+            const dayName = today.toLocaleDateString('id-ID', { weekday: 'long' }).toLowerCase();
+            const dayMap = {
+                'senin': 'monday', 'selasa': 'tuesday', 'rabu': 'wednesday',
+                'kamis': 'thursday', 'jumat': 'friday', 'sabtu': 'saturday', 'minggu': 'sunday'
+            };
+            const todayEnglish = dayMap[dayName];
+            
+            // Check work schedule
+            if (work.days && work.days.includes(dayName) && work.start && work.end) {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                const now = new Date();
+                const workStart = new Date();
+                workStart.setHours(parseInt(work.start.split(':')[0]), parseInt(work.start.split(':')[1]));
+                const workEnd = new Date();
+                workEnd.setHours(parseInt(work.end.split(':')[0]), parseInt(work.end.split(':')[1]));
+                
+                let status = 'Akan datang';
+                if (now >= workStart && now <= workEnd) status = 'Sedang berlangsung';
+                if (now > workEnd) status = 'Selesai';
+                
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>Kerja</h4>
+                        <p>${work.start} - ${work.end}</p>
+                    </div>
+                    <span class="badge">${status}</span>
+                `;
+                container.appendChild(item);
+            }
+            
+            // Update statistics
+            updateTimeStatistics(work, study);
+        }
+        
+        function updateAlarmList(alarms) {
+            const container = document.getElementById('active-alarms');
+            container.innerHTML = '';
+            
+            if (alarms.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray);">Belum ada alarm</p>';
+                return;
+            }
+            
+            // Show active alarms
+            alarms.filter(alarm => alarm.active).forEach(alarm => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${alarm.name}</h4>
+                        <p>${formatDateTime(alarm.time)} • ${getRepeatText(alarm.repeat)}</p>
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn-small btn-danger" onclick="toggleAlarm(${alarm.id})">Nonaktifkan</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            document.getElementById('alarm-count').textContent = alarms.filter(a => a.active).length;
+        }
+        
+        function updateTimeStatistics(work, study) {
+            // Calculate work hours per week
+            let workHours = 0;
+            if (work.days && work.start && work.end) {
+                const start = parseTime(work.start);
+                const end = parseTime(work.end);
+                const hoursPerDay = (end - start) / (1000 * 60 * 60);
+                workHours = work.days.length * hoursPerDay;
+            }
+            
+            // Calculate study hours per week
+            let studyHours = 0;
+            if (study.days && study.start && study.end) {
+                const start = parseTime(study.start);
+                const end = parseTime(study.end);
+                const hoursPerDay = (end - start) / (1000 * 60 * 60);
+                studyHours = study.days.length * hoursPerDay;
+            }
+            
+            const taskHours = parseFloat(document.getElementById('task-hours').value) || 0;
+            const totalHours = workHours + studyHours + taskHours;
+            const freeHours = 7 * 16 - totalHours; // Assuming 16 waking hours per day
+            
+            document.getElementById('work-hours').textContent = `${workHours.toFixed(1)} jam`;
+            document.getElementById('study-hours').textContent = `${studyHours.toFixed(1)} jam`;
+            document.getElementById('task-hours-total').textContent = `${taskHours} jam`;
+            document.getElementById('free-hours').textContent = `${Math.max(0, freeHours).toFixed(1)} jam`;
+        }
+        
+        function updateStatistics() {
+            // Calculate storage size
+            let totalSize = 0;
+            for (let key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    totalSize += localStorage[key].length * 2; // Approximate size in bytes
+                }
+            }
+            
+            document.getElementById('storage-size').textContent = `${(totalSize / 1024).toFixed(2)} KB`;
+        }
+        
+        // ===== INTEGRATION FUNCTIONS =====
+        function connectGoogleCalendar() {
+            // Create a Google Calendar event URL
+            const event = {
+                title: 'Jadwal dari Personal Website',
+                details: 'Jadwal yang disimpan dari aplikasi Personal Website',
+                location: '',
+                start: new Date(),
+                end: new Date(Date.now() + 60 * 60 * 1000) // 1 hour later
+            };
+            
+            const startDate = event.start.toISOString().replace(/-|:|\.\d+/g, '');
+            const endDate = event.end.toISOString().replace(/-|:|\.\d+/g, '');
+            
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(event.details)}&location=${encodeURIComponent(event.location)}`;
+            
+            window.open(url, '_blank');
+            alert('Anda akan diarahkan ke Google Calendar. Isi detail event dan simpan.');
+        }
+        
+        function setGoogleReminder() {
+            alert('Untuk Google Reminders:\n1. Buka Google Assistant\n2. Katakan "Set reminder"\n3. Ikuti instruksi\n\nAtau gunakan Google Keep untuk pengingat.');
+        }
+        
+        function exportToAppleNotes() {
+            // Create a text file with all data
+            const data = {
+                incomes: JSON.parse(localStorage.getItem('incomes') || '[]'),
+                expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+                savings: JSON.parse(localStorage.getItem('savings') || '[]'),
+                timestamp: new Date().toISOString()
+            };
+            
+            const text = `DATA PERSONAL WEBSITE\n\n` +
+                        `PEMASUKAN:\n${data.incomes.map(i => `- ${i.source}: Rp${i.amount} (${formatDate(i.date)})`).join('\n')}\n\n` +
+                        `PENGELUARAN:\n${data.expenses.map(e => `- ${e.for}: Rp${e.amount} (${formatDate(e.date)})`).join('\n')}\n\n` +
+                        `TABUNGAN/INVESTASI:\n${data.savings.map(s => `- ${s.type}: ${s.place}: Rp${s.amount}`).join('\n')}\n\n` +
+                        `Total Saldo: Rp${calculateTotalBalance(data.incomes, data.expenses)}\n` +
+                        `Ekspor pada: ${new Date().toLocaleString('id-ID')}`;
+            
+            downloadFile(text, 'data-personal-website.txt', 'text/plain');
+            alert('Data berhasil diekspor ke file teks. Buka file ini dan share ke Apple Notes.');
+        }
+        
+        // ===== EXPORT FUNCTIONS =====
+        function exportAllData() {
+            const data = {
+                incomes: JSON.parse(localStorage.getItem('incomes') || '[]'),
+                expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+                savings: JSON.parse(localStorage.getItem('savings') || '[]'),
+                alarms: JSON.parse(localStorage.getItem('alarms') || '[]'),
+                schedules: {
+                    work: JSON.parse(localStorage.getItem('workSchedule') || '{}'),
+                    play: JSON.parse(localStorage.getItem('playSchedule') || '{}'),
+                    study: JSON.parse(localStorage.getItem('studySchedule') || '{}')
+                },
+                timestamp: new Date().toISOString(),
+                version: '1.0'
+            };
+            
+            downloadFile(JSON.stringify(data, null, 2), 'personal-website-backup.json', 'application/json');
+        }
+        
+        function exportData(type) {
+            let data, filename;
+            
+            switch(type) {
+                case 'income':
+                    data = JSON.parse(localStorage.getItem('incomes') || '[]');
+                    filename = 'pemasukan.csv';
+                    exportToCSV(data, filename, ['date', 'source', 'amount', 'method', 'bank', 'notes']);
+                    break;
+                case 'expense':
+                    data = JSON.parse(localStorage.getItem('expenses') || '[]');
+                    filename = 'pengeluaran.csv';
+                    exportToCSV(data, filename, ['date', 'for', 'amount', 'method', 'bank', 'notes']);
+                    break;
+                case 'saving':
+                    data = JSON.parse(localStorage.getItem('savings') || '[]');
+                    filename = 'tabungan-investasi.csv';
+                    exportToCSV(data, filename, ['timestamp', 'type', 'place', 'amount', 'method', 'notes']);
+                    break;
             }
         }
         
-        // ===== MODIFIED FUNCTIONS =====
-        function setupInstallPrompt() {
-            let deferredPrompt = null;
+        function exportToCSV(data, filename, fields) {
+            if (data.length === 0) {
+                alert('Tidak ada data untuk diekspor');
+                return;
+            }
             
+            let csv = fields.join(',') + '\n';
+            
+            data.forEach(item => {
+                const row = fields.map(field => {
+                    let value = item[field] || '';
+                    // Handle dates
+                    if (field === 'date' || field === 'timestamp') {
+                        value = formatDate(value);
+                    }
+                    // Escape commas and quotes
+                    if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
+                        value = `"${value.replace(/"/g, '""')}"`;
+                    }
+                    return value;
+                });
+                csv += row.join(',') + '\n';
+            });
+            
+            downloadFile(csv, filename, 'text/csv');
+        }
+        
+        function backupData() {
+            exportAllData();
+        }
+        
+        function restoreData() {
+            const fileInput = document.getElementById('restore-file');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Pilih file backup terlebih dahulu');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (confirm('Restore data dari backup? Data saat ini akan diganti.')) {
+                        if (data.incomes) localStorage.setItem('incomes', JSON.stringify(data.incomes));
+                        if (data.expenses) localStorage.setItem('expenses', JSON.stringify(data.expenses));
+                        if (data.savings) localStorage.setItem('savings', JSON.stringify(data.savings));
+                        if (data.alarms) localStorage.setItem('alarms', JSON.stringify(data.alarms));
+                        if (data.schedules) {
+                            if (data.schedules.work) localStorage.setItem('workSchedule', JSON.stringify(data.schedules.work));
+                            if (data.schedules.play) localStorage.setItem('playSchedule', JSON.stringify(data.schedules.play));
+                            if (data.schedules.study) localStorage.setItem('studySchedule', JSON.stringify(data.schedules.study));
+                        }
+                        
+                        alert('Data berhasil di-restore!');
+                        loadAllData();
+                    }
+                } catch (error) {
+                    alert('File backup tidak valid: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function clearAllData() {
+            if (confirm('HAPUS SEMUA DATA? Tindakan ini tidak dapat dibatalkan!')) {
+                localStorage.clear();
+                alert('Semua data telah dihapus');
+                loadAllData();
+            }
+        }
+        
+        // ===== ALARM FUNCTIONS =====
+        function startAlarmChecker() {
+            setInterval(checkAlarms, 60000); // Check every minute
+        }
+        
+        function checkAlarms() {
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            const now = new Date();
+            
+            alarms.forEach(alarm => {
+                if (!alarm.active) return;
+                
+                const alarmTime = new Date(alarm.time);
+                
+                // Check if alarm should trigger
+                if (alarmTime <= now && now < new Date(alarmTime.getTime() + 60000)) { // Within 1 minute
+                    triggerAlarm(alarm);
+                }
+            });
+        }
+        
+        function triggerAlarm(alarm) {
+            // Show notification
+            if (Notification.permission === 'granted') {
+                new Notification('⏰ ' + alarm.name, {
+                    body: 'Waktunya ' + alarm.name,
+                    icon: '/icon.png'
+                });
+            } else {
+                alert('ALARM: ' + alarm.name);
+            }
+            
+            // Play sound (simulated)
+            console.log('Alarm triggered:', alarm.name);
+            
+            // Handle repeat
+            if (alarm.repeat !== 'once') {
+                // Update alarm time for next occurrence
+                const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+                const alarmIndex = alarms.findIndex(a => a.id === alarm.id);
+                
+                if (alarmIndex !== -1) {
+                    const nextTime = getNextAlarmTime(alarm.time, alarm.repeat);
+                    alarms[alarmIndex].time = nextTime.toISOString().slice(0, 16);
+                    localStorage.setItem('alarms', JSON.stringify(alarms));
+                }
+            }
+        }
+        
+        function getNextAlarmTime(time, repeat) {
+            const next = new Date(time);
+            
+            switch(repeat) {
+                case 'daily':
+                    next.setDate(next.getDate() + 1);
+                    break;
+                case 'weekly':
+                    next.setDate(next.getDate() + 7);
+                    break;
+                case 'weekdays':
+                    do {
+                        next.setDate(next.getDate() + 1);
+                    } while (next.getDay() === 0 || next.getDay() === 6); // Skip weekends
+                    break;
+            }
+            
+            return next;
+        }
+        
+        function toggleAlarm(id) {
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            const alarmIndex = alarms.findIndex(a => a.id === id);
+            
+            if (alarmIndex !== -1) {
+                alarms[alarmIndex].active = !alarms[alarmIndex].active;
+                localStorage.setItem('alarms', JSON.stringify(alarms));
+                loadAlarms();
+            }
+        }
+        
+        // ===== PWA FUNCTIONS =====
+        function setupServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
+            }
+        }
+        
+        function setupInstallPrompt() {
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
                 
-                // Show install button
-                document.getElementById('installBtn').style.display = 'inline-block';
-                document.getElementById('menuInstall').style.display = 'flex';
+                // Show install button after 5 seconds
+                setTimeout(() => {
+                    if (deferredPrompt && !isPWAInstalled()) {
+                        document.getElementById('installBtn').style.display = 'inline-block';
+                    }
+                }, 5000);
             });
             
             window.addEventListener('appinstalled', () => {
                 deferredPrompt = null;
                 document.getElementById('installBtn').style.display = 'none';
-                document.getElementById('menuInstall').style.display = 'none';
-                showNotification('Aplikasi berhasil diinstall!', 'success');
-            });
-            
-            // Install button handler
-            document.getElementById('installBtn').addEventListener('click', showInstallPrompt);
-            document.getElementById('installConfirm').addEventListener('click', installPWA);
-            document.getElementById('installCancel').addEventListener('click', () => {
-                document.getElementById('installPrompt').classList.remove('show');
+                alert('Aplikasi berhasil diinstall! Sekarang bisa diakses dari homescreen.');
             });
         }
         
@@ -1541,34 +2057,167 @@
                     deferredPrompt = null;
                 });
             } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                alert('📱 Untuk install di iPhone:\n\n1. Buka di Safari\n2. Tap tombol share (□ dengan ↑)\n3. Scroll ke bawah\n4. Pilih "Add to Home Screen"');
+                alert('Untuk install di iOS:\n1. Buka di Safari\n2. Tap tombol share (kotak dengan panah)\n3. Scroll ke bawah\n4. Pilih "Add to Home Screen"');
             } else {
-                alert('💻 Untuk Chrome/Edge:\n1. Klik menu (⋮)\n2. Pilih "Install app"\n3. Atau "Add to Home Screen"');
+                alert('Fitur install hanya tersedia di browser tertentu. Coba buka di Chrome/Edge.');
             }
             
             document.getElementById('installPrompt').classList.remove('show');
         }
         
-        // ===== SEMUA FUNGSI LAINNYA TETAP SAMA =====
-        // (Semua fungsi dari kode sebelumnya: initializeUI, loadAllData, saveIncome, dll)
-        // ... [Semua fungsi JavaScript dari kode sebelumnya tetap di sini]
-        
-        // Hanya tambah fungsi ini di akhir:
         function isPWAInstalled() {
             return window.matchMedia('(display-mode: standalone)').matches || 
                    window.navigator.standalone === true;
         }
         
-        // Auto check PWA status
-        setTimeout(checkPWAStatus, 1000);
+        // ===== HELPER FUNCTIONS =====
+        function formatCurrency(amount) {
+            return 'Rp ' + amount.toLocaleString('id-ID');
+        }
         
-        // Force hide loading screen after 5 seconds max
-        setTimeout(() => {
-            const loading = document.getElementById('loading');
-            if (loading) {
-                loading.style.display = 'none';
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+        
+        function formatDateTime(dateTimeString) {
+            if (!dateTimeString) return '-';
+            const date = new Date(dateTimeString);
+            return date.toLocaleString('id-ID', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        function getRepeatText(repeat) {
+            const texts = {
+                'once': 'Sekali',
+                'daily': 'Setiap hari',
+                'weekly': 'Setiap minggu',
+                'weekdays': 'Hari kerja'
+            };
+            return texts[repeat] || repeat;
+        }
+        
+        function parseTime(timeString) {
+            const [hours, minutes] = timeString.split(':').map(Number);
+            const date = new Date();
+            date.setHours(hours, minutes, 0, 0);
+            return date;
+        }
+        
+        function getCurrentDateTimeLocal() {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            return now.toISOString().slice(0, 16);
+        }
+        
+        function setCurrentDateTime() {
+            const now = getCurrentDateTimeLocal();
+            document.querySelectorAll('input[type="datetime-local"]').forEach(input => {
+                if (!input.value) input.value = now;
+            });
+        }
+        
+        function clearForm(type) {
+            switch(type) {
+                case 'income':
+                    document.getElementById('income-source').value = '';
+                    document.getElementById('income-amount').value = '';
+                    document.getElementById('income-notes').value = '';
+                    break;
+                case 'expense':
+                    document.getElementById('expense-for').value = '';
+                    document.getElementById('expense-amount').value = '';
+                    document.getElementById('expense-notes').value = '';
+                    break;
+                case 'saving':
+                    document.getElementById('saving-place').value = '';
+                    document.getElementById('saving-amount').value = '';
+                    document.getElementById('saving-notes').value = '';
+                    break;
+                case 'alarm':
+                    document.getElementById('alarmName').value = '';
+                    document.getElementById('alarmTime').value = getCurrentDateTimeLocal();
+                    break;
             }
-        }, 5000);
+        }
+        
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type: type });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function calculateTotalBalance(incomes, expenses) {
+            const totalIncome = incomes.reduce((sum, i) => sum + (i.amount || 0), 0);
+            const totalExpense = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+            return (totalIncome - totalExpense).toLocaleString('id-ID');
+        }
+        
+        function requestNotificationPermission() {
+            if ("Notification" in window && Notification.permission === "default") {
+                Notification.requestPermission().then(permission => {
+                    notificationPermission = permission === "granted";
+                    if (notificationPermission) {
+                        alert('Notifikasi diaktifkan! Anda akan menerima alarm.');
+                    }
+                });
+            }
+            return false;
+        }
+        
+        // Placeholder functions for edit/delete
+        function editIncome(id) {
+            alert('Fitur edit akan datang! Untuk sekarang, hapus dan buat ulang.');
+        }
+        
+        function deleteIncome(id) {
+            if (confirm('Hapus pemasukan ini?')) {
+                const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+                const filtered = incomes.filter(i => i.id !== id);
+                localStorage.setItem('incomes', JSON.stringify(filtered));
+                loadFinanceData();
+            }
+        }
+        
+        function editExpense(id) {
+            alert('Fitur edit akan datang! Untuk sekarang, hapus dan buat ulang.');
+        }
+        
+        function deleteExpense(id) {
+            if (confirm('Hapus pengeluaran ini?')) {
+                const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+                const filtered = expenses.filter(e => e.id !== id);
+                localStorage.setItem('expenses', JSON.stringify(filtered));
+                loadFinanceData();
+            }
+        }
+        
+        function editSaving(id) {
+            alert('Fitur edit akan datang! Untuk sekarang, hapus dan buat ulang.');
+        }
+        
+        function deleteSaving(id) {
+            if (confirm('Hapus data tabungan/investasi ini?')) {
+                const savings = JSON.parse(localStorage.getItem('savings') || '[]');
+                const filtered = savings.filter(s => s.id !== id);
+                localStorage.setItem('savings', JSON.stringify(filtered));
+                loadFinanceData();
+            }
+        }
     </script>
 </body>
 </html>
