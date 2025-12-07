@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4361ee">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Personal Website">
+    
+    <title>Personal Website</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Semua style dari sebelumnya tetap ada... */
+        /* Aku tambahin style khusus untuk mobile/pwa */
+        
+        /* Tombol lebih besar untuk mobile */
+        @media (max-width: 768px) {
+            .btn, .tab-btn, input, select {
+                min-height: 44px !important; /* Ukuran touch minimum */
+                font-size: 16px !important; /* Hindari zoom di iOS */
+            }
+            
+            .tab-btn {
+                padding: 15px 20px;
+                margin: 5px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            /* Navbar fixed untuk mobile */
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+                padding: 10px;
+            }
+            
+            .mobile-nav-btn {
+                flex: 1;
+                text-align: center;
+                padding: 12px 5px;
+                border: none;
+                background: none;
+                font-size: 0.8rem;
+                color: #666;
+            }
+            
+            .mobile-nav-btn.active {
+                color: #4361ee;
+            }
+            
+            .mobile-nav-btn i {
+                display: block;
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+            
+            /* Tambah padding untuk safe area iPhone */
+            body {
+                padding-bottom: 70px;
+            }
+            
+            .card {
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Hide desktop tabs on mobile */
+        @media (max-width: 768px) {
+            .tabs {
+                display: none;
+            }
+        }
+        
+        /* Show desktop tabs on larger screens */
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+        
+        /* Loading screen untuk PWA */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Install Prompt */
+        #installPrompt {
+            position: fixed;
+            bottom: 80px;
+            left: 15px;
+            right: 15px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: none;
+        }
+        
+        #installPrompt.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="loader"></div>
+        <h2 style="color: white;">Personal Website</h2>
+        <p style="color: white; margin-top: 10px;">Loading...</p>
+    </div>
+    
+    <!-- Install Prompt -->
+    <div id="installPrompt">
+        <h3><i class="fas fa-download"></i> Install App</h3>
+        <p>Install aplikasi ini ke homescreen untuk akses lebih cepat!</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="installCancel" class="btn" style="flex: 1; background: #ccc;">Nanti</button>
+            <button id="installConfirm" class="btn" style="flex: 1;">Install</button>
+        </div>
+    </div>
+    
+    <!-- Header (sama seperti sebelumnya) -->
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-user-circle"></i> Personal Website</h1>
+            <p>Kelola keuangan dan waktu Anda dengan lebih efektif</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Desktop Tabs (untuk laptop/tablet) -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="money-management">
+                <i class="fas fa-money-bill-wave"></i> Money Management
+            </button>
+            <button class="tab-btn" data-tab="time-management">
+                <i class="fas fa-clock"></i> Time Management
+            </button>
+            <button class="tab-btn" data-tab="integrations">
+                <i class="fas fa-link"></i> Integrasi
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation (untuk HP) -->
+        <div class="mobile-nav">
+            <button class="mobile-nav-btn active" data-tab="money-management">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Money</span>
+            </button>
+            <button class="mobile-nav-btn" data-tab="time-management">
+                <i class="fas fa-clock"></i>
+                <span>Time</span>
+            </button>
+            <button class="mobile-nav-btn" data-tab="integrations">
+                <i class="fas fa-link"></i>
+                <span>Apps</span>
+            </button>
+        </div>
+        
+        <!-- Konten tetap sama seperti sebelumnya -->
+        <!-- Money Management Tab -->
+        <div class="tab-content active" id="money-management">
+            <!-- ... (sama seperti sebelumnya) ... -->
+        </div>
+        
+        <!-- Time Management Tab -->
+        <div class="tab-content" id="time-management">
+            <!-- ... (sama seperti sebelumnya) ... -->
+        </div>
+        
+        <!-- Integrations Tab -->
+        <div class="tab-content" id="integrations">
+            <!-- ... (sama seperti sebelumnya) ... -->
+        </div>
+        
+        <!-- Footer yang lebih simple untuk mobile -->
+        <footer id="main-footer">
+            <p>Personal Website &copy; 2023 | Akses cepat via homescreen</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <button id="installBtn" class="btn btn-small" style="background: #4cc9f0;">
+                    <i class="fas fa-plus-circle"></i> Tambah ke Homescreen
+                </button>
+            </p>
+        </footer>
+    </div>
+
+    <!-- File Manifest (akan dibuat dinamis) -->
+    <script>
+        // Buat manifest dinamis untuk PWA
+        const manifest = {
+            "name": "Personal Website",
+            "short_name": "MyApp",
+            "description": "Aplikasi manajemen keuangan dan waktu",
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#4361ee",
+            "theme_color": "#4361ee",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iOTYiIGZpbGw9IiM0MzYxRUUiLz48cGF0aCBkPSJNNzIgMTIwSDEyMEMxMzIuOCAxMjAgMTQ0IDEwOC44IDE0NCA5NkMxNDQgODMuMiAxMzIuOCA3MiAxMjAgNzJINzJDNTkuMiA3MiA0OCA4My4yIDQ4IDk2QzQ4IDEwOC44IDU5LjIgMTIwIDcyIDEyMFoiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTEyMCA3Mkg3MkM1OS4yIDcyIDQ4IDgzLjIgNDggOTZDNDggMTA4LjggNTkuMiAxMjAgNzIgMTIwSDEyMEMxMzIuOCAxMjAgMTQ0IDEwOC44IDE0NCA5NkMxNDQgODMuMiAxMzIuOCA3MiAxMjAgNzJaIiBmaWxsPSIjNENDOUYwIi8+PC9zdmc+",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml"
+                }
+            ]
+        };
+
+        // Buat link manifest
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type: 'application/json'}));
+        document.head.appendChild(link);
+
+        // Hapus loading screen setelah semua load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
+                
+                // Cek jika bisa install sebagai PWA
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('sw.js').catch(console.error);
+                }
+                
+                // Tampilkan prompt install untuk mobile
+                if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    setTimeout(showInstallPrompt, 3000);
+                }
+            }, 1000);
+        });
+
+        // Fungsi untuk show install prompt
+        function showInstallPrompt() {
+            const prompt = document.getElementById('installPrompt');
+            prompt.classList.add('show');
+            
+            // Cek jika sudah diinstall
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                prompt.style.display = 'none';
+            }
+        }
+
+        // Event listeners untuk mobile nav
+        document.querySelectorAll('.mobile-nav-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Scroll ke atas
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Install button handler
+        document.getElementById('installBtn').addEventListener('click', showInstallPrompt);
+        
+        // Install prompt buttons
+        document.getElementById('installCancel').addEventListener('click', function() {
+            document.getElementById('installPrompt').classList.remove('show');
+        });
+        
+        document.getElementById('installConfirm').addEventListener('click', function() {
+            // Untuk Android Chrome
+            if (window.deferredPrompt) {
+                window.deferredPrompt.prompt();
+                window.deferredPrompt.userChoice.then(() => {
+                    window.deferredPrompt = null;
+                });
+            }
+            
+            // Untuk iOS Safari, show instructions
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                alert('Untuk install di iOS:\n1. Tap tombol share (kotak dengan panah)\n2. Scroll ke bawah\n3. Pilih "Add to Home Screen"');
+            }
+            
+            document.getElementById('installPrompt').classList.remove('show');
+        });
+
+        // Simpan data ke localStorage (biar data ga ilang)
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Simpan')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Cari form terdekat
+                    const form = this.closest('.form-group');
+                    const inputs = form.querySelectorAll('input, select, textarea');
+                    
+                    // Simpan ke localStorage
+                    inputs.forEach(input => {
+                        if (input.value) {
+                            localStorage.setItem(input.id || input.name, input.value);
+                        }
+                    });
+                    
+                    alert('Data berhasil disimpan!');
+                    
+                    // Refresh data yang ditampilkan
+                    loadSavedData();
+                });
+            }
+        });
+
+        // Load data dari localStorage
+        function loadSavedData() {
+            document.querySelectorAll('input, select, textarea').forEach(input => {
+                const savedValue = localStorage.getItem(input.id || input.name);
+                if (savedValue) {
+                    input.value = savedValue;
+                }
+            });
+        }
+
+        // Load data saat pertama kali
+        loadSavedData();
+
+        // Before install prompt untuk PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'block';
+        });
+
+        // Deteksi jika sudah diinstall sebagai PWA
+        window.addEventListener('appinstalled', () => {
+            document.getElementById('installPrompt').style.display = 'none';
+            document.getElementById('installBtn').style.display = 'none';
+            alert('Aplikasi berhasil diinstall! Sekarang bisa diakses dari homescreen.');
+        });
+    </script>
+</body>
+</html>
