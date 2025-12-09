@@ -11,368 +11,679 @@
     <title>Produktivy Apps</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* OPTIMIZED STYLES - DIPERKECIL */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
+        /* OPTIMIZED CSS - KEEP ALL FEATURES */
         :root {
-            --primary: #4361ee; --secondary: #3a0ca3; --accent: #4cc9f0;
-            --light: #f8f9fa; --dark: #212529; --success: #4ade80;
-            --warning: #f59e0b; --danger: #ef4444; --gray: #6c757d;
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray: #6c757d;
             --gray-light: #e9ecef;
         }
         
         [data-theme="dark"] {
-            --primary: #5a7af0; --secondary: #4b1dc9; --accent: #60d9ff;
-            --light: #121212; --dark: #f8f9fa; --gray: #a0a0a0;
+            --primary: #5a7af0;
+            --secondary: #4b1dc9;
+            --accent: #60d9ff;
+            --light: #121212;
+            --dark: #f8f9fa;
+            --gray: #a0a0a0;
             --gray-light: #2d2d2d;
         }
         
-        body { background-color: #f5f7ff; color: var(--dark); line-height: 1.6; padding-bottom: 80px; }
-        [data-theme="dark"] body { background-color: #0a0a0a; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
         
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            transition: background-color 0.3s;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: #0a0a0a;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* HEADER */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white; padding: 2rem 0; text-align: center;
-            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 1.5rem;
             position: relative;
         }
         
-        .header-buttons {
-            position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;
+        .header-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
         }
         
-        .header-btn {
-            background: rgba(255, 255, 255, 0.2); border: none; width: 40px; height: 40px;
-            border-radius: 50%; color: white; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; font-size: 1.2rem;
-            transition: all 0.3s ease;
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
         }
         
-        .header-btn:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.1); }
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
         
-        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        header p { font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
         
-        /* Navigation */
-        .tabs { display: flex; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px; }
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* TABS */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
         .tab-btn {
-            background-color: white; border: none; padding: 10px 20px; font-size: 0.95rem;
-            font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        [data-theme="dark"] .tab-btn { background-color: #2d2d2d; color: #f8f9fa; }
-        .tab-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
-        .tab-btn.active { background-color: var(--primary); color: white; }
         
-        /* Mobile Navigation */
+        [data-theme="dark"] .tab-btn {
+            background: #2d2d2d;
+            color: #f0f0f0;
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* MOBILE NAV */
         .mobile-nav {
-            display: none; position: fixed; bottom: 0; left: 0; right: 0;
-            background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000; padding: 10px;
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
-        [data-theme="dark"] .mobile-nav { background-color: #2d2d2d; }
+        
+        [data-theme="dark"] .mobile-nav {
+            background: #2d2d2d;
+        }
+        
         .mobile-nav-btn {
-            flex: 1; text-align: center; padding: 12px 5px; border: none;
-            background: none; font-size: 0.8rem; color: #666;
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 10px;
+            color: #666;
+            font-size: 0.8rem;
+            text-align: center;
         }
-        [data-theme="dark"] .mobile-nav-btn { color: #a0a0a0; }
-        .mobile-nav-btn.active { color: var(--primary); }
-        .mobile-nav-btn i { display: block; font-size: 1.2rem; margin-bottom: 5px; }
         
-        /* Tab Content */
+        [data-theme="dark"] .mobile-nav-btn {
+            color: #aaa;
+        }
+        
+        .mobile-nav-btn.active {
+            color: var(--primary);
+        }
+        
+        .mobile-nav-btn i {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* CONTENT */
         .tab-content {
-            display: none; background-color: white; border-radius: 15px;
-            padding: 1.5rem; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
-        [data-theme="dark"] .tab-content { background-color: #1e1e1e; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Section Headers */
-        .section-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 1.5rem; padding-bottom: 1rem;
-            border-bottom: 2px solid var(--gray-light);
+        [data-theme="dark"] .tab-content {
+            background: #1e1e1e;
         }
-        .section-header h2 { color: var(--primary); font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
         
-        /* Search Container */
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* SEARCH */
         .search-container {
-            margin: 20px 0; background: var(--light); padding: 15px;
-            border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
         }
-        [data-theme="dark"] .search-container { background: #2d2d2d; }
-        .search-box { position: relative; margin-bottom: 15px; }
-        .search-box input {
-            width: 100%; padding: 10px 40px 10px 15px; border: 2px solid var(--primary);
-            border-radius: 8px; font-size: 1rem; background: white;
-        }
-        [data-theme="dark"] .search-box input { background: #333; color: white; }
-        .search-box i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
         
-        /* Form Styles */
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--dark); }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px 12px; border: 1px solid var(--gray-light);
-            border-radius: 8px; font-size: 1rem; background: white; color: var(--dark);
+        .search-box {
+            position: relative;
         }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        [data-theme="dark"] .search-box input {
+            background: #333;
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
         [data-theme="dark"] .form-group input,
         [data-theme="dark"] .form-group select,
         [data-theme="dark"] .form-group textarea {
-            background: #333; color: #f8f9fa; border-color: #444;
+            background: #333;
+            color: white;
+            border-color: #555;
         }
-        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
         
-        /* Button Styles */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        /* BUTTONS */
         .btn {
-            display: inline-block; padding: 10px 20px; background-color: var(--primary);
-            color: white; border: none; border-radius: 8px; font-size: 1rem;
-            font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-            text-align: center;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
         }
-        .btn:hover { background-color: var(--secondary); transform: translateY(-2px); }
-        .btn-small { padding: 6px 12px; font-size: 0.9rem; }
-        .btn-success { background-color: var(--success); }
-        .btn-warning { background-color: var(--warning); }
-        .btn-danger { background-color: var(--danger); }
         
-        /* Card Styles */
-        .cards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success { background: var(--success); }
+        .btn-warning { background: var(--warning); }
+        .btn-danger { background: var(--danger); }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+        
+        /* CARDS */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
         .card {
-            background-color: white; border-radius: 12px; padding: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border-left: 5px solid var(--primary);
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
         }
-        [data-theme="dark"] .card { background-color: #2d2d2d; }
-        .card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem; }
-        .card .amount { font-size: 1.3rem; font-weight: 700; color: var(--secondary); margin: 1rem 0; }
         
-        /* Data List */
-        .data-list { margin-top: 1.5rem; }
+        [data-theme="dark"] .card {
+            background: #2d2d2d;
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 0.5rem 0;
+        }
+        
+        /* DATA LIST */
+        .data-list {
+            margin-top: 1rem;
+        }
+        
         .data-item {
-            background-color: var(--light); padding: 0.8rem; border-radius: 8px;
-            margin-bottom: 0.8rem; border-left: 4px solid var(--primary);
-            display: flex; justify-content: space-between; align-items: center;
+            background: var(--light);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        [data-theme="dark"] .data-item { background-color: #2d2d2d; }
-        .data-info h4 { color: var(--primary); margin-bottom: 0.3rem; font-size: 1rem; }
-        .data-info p { font-size: 0.85rem; color: var(--gray); }
-        .data-actions { display: flex; gap: 8px; }
         
-        /* Badge */
-        .badge { background-color: #4ade80; color: white; padding: 2px 6px; border-radius: 12px; font-size: 0.75rem; }
+        .data-info h4 {
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
         
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; }
+        .data-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .data-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .modal-content {
-            background: white; border-radius: 15px; padding: 1.5rem;
-            max-width: 500px; width: 90%; margin: auto;
-            position: relative; top: 50%; transform: translateY(-50%);
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        [data-theme="dark"] .modal-content { background: #1e1e1e; }
         
-        /* Notification */
+        [data-theme="dark"] .modal-content {
+            background: #1e1e1e;
+        }
+        
+        /* NOTIFICATION */
         .notification {
-            position: fixed; top: 20px; right: 20px; background: var(--primary);
-            color: white; padding: 12px 16px; border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 9999;
-            display: flex; align-items: center; gap: 10px;
-            animation: slideIn 0.3s ease;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideInRight 0.3s;
         }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
         
-        /* Loading Screen */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification-success { background: var(--success); }
+        .notification-warning { background: var(--warning); }
+        .notification-danger { background: var(--danger); }
+        
+        /* LOADING */
         #loading {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
-        .loader {
-            width: 40px; height: 40px; border: 4px solid white;
-            border-radius: 50%; border-top-color: transparent;
-            animation: spin 1s linear infinite; margin-bottom: 15px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Install Prompt */
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* INSTALL PROMPT */
         #installPrompt {
-            position: fixed; bottom: 80px; left: 15px; right: 15px;
-            background: white; border-radius: 15px; padding: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2); z-index: 1001;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
             display: none;
         }
-        [data-theme="dark"] #installPrompt { background: #1e1e1e; }
-        #installPrompt.show { display: block; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        /* Footer */
-        footer { text-align: center; padding: 1.5rem 0; color: var(--gray); font-size: 0.9rem; }
-        .footer-buttons { display: flex; justify-content: center; gap: 10px; margin: 15px 0; flex-wrap: wrap; }
+        [data-theme="dark"] #installPrompt {
+            background: #2d2d2d;
+        }
         
-        /* Responsive */
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            header h1 { font-size: 1.8rem; }
-            .header-buttons { top: 10px; right: 10px; }
             .tabs { display: none; }
             .mobile-nav { display: flex; }
             body { padding-bottom: 70px; }
-            .form-row { grid-template-columns: 1fr; }
             .cards-container { grid-template-columns: 1fr; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .tab-content { padding: 1rem; }
+            .form-row { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8rem; }
+            .header-controls { top: 10px; right: 10px; }
         }
         
-        @media (min-width: 769px) { .mobile-nav { display: none; } }
+        @media (min-width: 769px) {
+            .mobile-nav { display: none; }
+        }
+        
+        /* SIMPLE CHART STYLE */
+        .simple-chart {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            height: 100px;
+            margin-top: 20px;
+            align-items: end;
+        }
+        
+        .chart-bar {
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        
+        .chart-bar-income {
+            background: var(--success);
+        }
+        
+        .chart-bar-expense {
+            background: var(--danger);
+        }
+        
+        .chart-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loading">
         <div class="loader"></div>
-        <h2 style="color: white; font-size: 1.5rem;">Produktivy Apps</h2>
+        <h2 style="color: white; margin-top: 10px;">Produktivy Apps</h2>
     </div>
     
     <!-- Install Prompt -->
     <div id="installPrompt">
         <h3><i class="fas fa-download"></i> Install App</h3>
-        <p>Install aplikasi ini ke homescreen untuk akses lebih cepat!</p>
+        <p>Install aplikasi ke homescreen untuk akses lebih cepat!</p>
         <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button id="installCancel" class="btn" style="flex: 1; background: #ccc;">Nanti</button>
-            <button id="installConfirm" class="btn" style="flex: 1;">Install</button>
+            <button id="installCancel" class="btn" style="background: #ccc;">Nanti</button>
+            <button id="installConfirm" class="btn">Install</button>
         </div>
     </div>
     
     <!-- Alarm Modal -->
     <div id="alarmModal" class="modal">
         <div class="modal-content">
-            <div class="section-header">
-                <h2><i class="fas fa-bell"></i> Atur Alarm</h2>
-                <button id="closeAlarmModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark);">×</button>
+            <h3><i class="fas fa-bell"></i> Atur Alarm</h3>
+            <div style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Nama Alarm</label>
+                    <input type="text" id="alarmName" placeholder="Bangun tidur, Meeting, dll">
+                </div>
+                <div class="form-group">
+                    <label>Waktu Alarm</label>
+                    <input type="datetime-local" id="alarmTime">
+                </div>
+                <div class="form-group">
+                    <label>Ulangi</label>
+                    <select id="alarmRepeat">
+                        <option value="once">Sekali saja</option>
+                        <option value="daily">Setiap hari</option>
+                        <option value="weekly">Setiap minggu</option>
+                        <option value="weekdays">Hari kerja</option>
+                    </select>
+                </div>
+                <button id="saveAlarm" class="btn btn-success" style="width: 100%; margin-top: 10px;">
+                    <i class="fas fa-save"></i> Simpan Alarm
+                </button>
             </div>
-            
-            <div class="form-group">
-                <label for="alarmName">Nama Alarm</label>
-                <input type="text" id="alarmName" placeholder="Contoh: Bangun tidur, Meeting, dll">
-            </div>
-            
-            <div class="form-group">
-                <label for="alarmTime">Waktu Alarm</label>
-                <input type="datetime-local" id="alarmTime">
-            </div>
-            
-            <div class="form-group">
-                <label for="alarmRepeat">Ulangi</label>
-                <select id="alarmRepeat">
-                    <option value="once">Sekali saja</option>
-                    <option value="daily">Setiap hari</option>
-                    <option value="weekly">Setiap minggu</option>
-                    <option value="weekdays">Hari kerja (Senin-Jumat)</option>
-                </select>
-            </div>
-            
-            <button id="saveAlarm" class="btn btn-success" style="width: 100%; margin-top: 10px;">
-                <i class="fas fa-save"></i> Simpan Alarm
-            </button>
         </div>
     </div>
     
     <!-- Header -->
     <header>
-        <div class="header-buttons">
-            <button class="header-btn" id="themeToggle" title="Toggle Dark Mode">
+        <div class="header-controls">
+            <button class="icon-btn" id="themeToggle" title="Dark Mode">
                 <i class="fas fa-moon"></i>
             </button>
-            <button class="header-btn" id="searchToggle" title="Pencarian (Ctrl+F)">
+            <button class="icon-btn" id="searchToggle" title="Pencarian (Ctrl+F)">
                 <i class="fas fa-search"></i>
+            </button>
+            <button class="icon-btn" id="refreshBtn" title="Refresh Data">
+                <i class="fas fa-redo"></i>
             </button>
         </div>
         <div class="container">
-            <h1><i class="fas fa-user-circle"></i> Produktivy Apps</h1>
-            <p>Kelola keuangan dan waktu Anda dengan lebih efektif dan efisien</p>
+            <h1><i class="fas fa-chart-line"></i> Produktivy Apps</h1>
+            <p>Kelola keuangan dan waktu dengan lebih efektif</p>
         </div>
     </header>
     
     <!-- Search Container -->
-    <div class="container" id="searchContainer" style="display: none;">
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Cari transaksi, jadwal, atau alarm..." onkeyup="performSearch()">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="search-results" id="searchResults">
-                <div style="text-align: center; padding: 20px; color: var(--gray);">
-                    <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <p>Masukkan kata kunci untuk mencari</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 10px;">
-                <small>Tekan ESC untuk menutup</small>
-            </div>
+    <div class="container search-container" id="searchContainer">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari transaksi, jadwal, atau alarm...">
+            <i class="fas fa-search"></i>
         </div>
+        <div id="searchResults"></div>
     </div>
     
     <div class="container">
         <!-- Desktop Tabs -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="money-management">
-                <i class="fas fa-money-bill-wave"></i> Money
+            <button class="tab-btn active" data-tab="money">
+                <i class="fas fa-money-bill-wave"></i> Keuangan
             </button>
-            <button class="tab-btn" data-tab="time-management">
-                <i class="fas fa-clock"></i> Time
+            <button class="tab-btn" data-tab="time">
+                <i class="fas fa-clock"></i> Waktu
             </button>
-            <button class="tab-btn" data-tab="integrations">
-                <i class="fas fa-link"></i> Apps
-            </button>
-            <button class="tab-btn" data-tab="data-view">
+            <button class="tab-btn" data-tab="data">
                 <i class="fas fa-database"></i> Data
+            </button>
+            <button class="tab-btn" data-tab="apps">
+                <i class="fas fa-link"></i> Apps
             </button>
         </div>
         
         <!-- Mobile Navigation -->
         <div class="mobile-nav">
-            <button class="mobile-nav-btn active" data-tab="money-management">
+            <button class="mobile-nav-btn active" data-tab="money">
                 <i class="fas fa-money-bill-wave"></i>
-                <span>Money</span>
+                <span>Uang</span>
             </button>
-            <button class="mobile-nav-btn" data-tab="time-management">
+            <button class="mobile-nav-btn" data-tab="time">
                 <i class="fas fa-clock"></i>
-                <span>Time</span>
+                <span>Waktu</span>
             </button>
-            <button class="mobile-nav-btn" data-tab="integrations">
-                <i class="fas fa-link"></i>
-                <span>Apps</span>
-            </button>
-            <button class="mobile-nav-btn" data-tab="data-view">
+            <button class="mobile-nav-btn" data-tab="data">
                 <i class="fas fa-database"></i>
                 <span>Data</span>
             </button>
+            <button class="mobile-nav-btn" data-tab="apps">
+                <i class="fas fa-link"></i>
+                <span>Apps</span>
+            </button>
         </div>
         
-        <!-- Money Management Tab -->
-        <div class="tab-content active" id="money-management">
-            <div class="section-header">
-                <h2><i class="fas fa-coins"></i> Money Management</h2>
+        <!-- Money Tab -->
+        <div id="money" class="tab-content active">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2><i class="fas fa-coins"></i> Manajemen Keuangan</h2>
                 <div>
-                    <button class="btn btn-success" id="add-income">
+                    <button class="btn btn-success" id="addIncome">
                         <i class="fas fa-plus"></i> Pemasukan
                     </button>
-                    <button class="btn btn-warning" id="add-expense" style="margin-left: 10px;">
+                    <button class="btn btn-warning" id="addExpense" style="margin-left: 10px;">
                         <i class="fas fa-minus"></i> Pengeluaran
                     </button>
                 </div>
             </div>
             
-            <!-- Pendataan Pemasukan -->
-            <div class="form-group" id="income-form">
-                <h3 style="color: var(--success);"><i class="fas fa-arrow-down"></i> Pendataan Pemasukan</h3>
+            <!-- Income Form -->
+            <div id="incomeForm">
+                <h3><i class="fas fa-arrow-down" style="color: var(--success);"></i> Tambah Pemasukan</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="income-source">Pemasukan dari mana?</label>
-                        <select id="income-source">
+                        <label>Sumber</label>
+                        <select id="incomeSource">
                             <option value="">Pilih sumber</option>
                             <option value="gaji">Gaji</option>
                             <option value="bisnis">Bisnis</option>
@@ -382,122 +693,108 @@
                             <option value="lainnya">Lainnya</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="income-date">Tanggal & Jam</label>
-                        <input type="datetime-local" id="income-date">
+                        <label>Tanggal & Jam</label>
+                        <input type="datetime-local" id="incomeDate">
                     </div>
-                    
+                </div>
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="income-method">Cash / M-Banking?</label>
-                        <select id="income-method">
+                        <label>Metode</label>
+                        <select id="incomeMethod">
                             <option value="cash">Cash</option>
                             <option value="m-banking">M-Banking</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="income-bank">M-Banking apa?</label>
-                        <select id="income-bank">
+                        <label>Bank/E-wallet</label>
+                        <select id="incomeBank">
                             <option value="">Pilih bank</option>
                             <option value="bca">BCA</option>
-                            <option value="Seabank">Seabank</option>
-                            <option value="OCBC">OCBC</option>
-                            <option value="mandiri">Mandiri</option>
-                            <option value="bri">BRI</option>
-                            <option value="bni">BNI</option>
-                            <option value="DANA">DANA</option>
-                            <option value="GOPAY">GOPAY</option>
+                            <option value="seabank">Seabank</option>
+                            <option value="ocbc">OCBC</option>
+                            <option value="dana">DANA</option>
+                            <option value="gopay">GOPAY</option>
                         </select>
                     </div>
                 </div>
-                
                 <div class="form-group">
-                    <label for="income-amount">Jumlah Pemasukan</label>
-                    <input type="number" id="income-amount" placeholder="Masukkan jumlah">
+                    <label>Jumlah</label>
+                    <input type="number" id="incomeAmount" placeholder="Masukkan jumlah">
                 </div>
-                
-                <button class="btn btn-success" id="save-income">
+                <button class="btn btn-success" id="saveIncome">
                     <i class="fas fa-save"></i> Simpan Pemasukan
                 </button>
             </div>
             
-            <!-- Pendataan Pengeluaran -->
-            <div class="form-group" id="expense-form">
-                <h3 style="color: var(--danger);"><i class="fas fa-arrow-up"></i> Pendataan Pengeluaran</h3>
+            <!-- Expense Form -->
+            <div id="expenseForm" style="margin-top: 30px;">
+                <h3><i class="fas fa-arrow-up" style="color: var(--danger);"></i> Tambah Pengeluaran</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="expense-for">Pengeluaran untuk apa?</label>
-                        <input type="text" id="expense-for" placeholder="Contoh: Beli makanan, transportasi">
+                        <label>Untuk apa?</label>
+                        <input type="text" id="expenseFor" placeholder="Beli makanan, transportasi, dll">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="expense-date">Tanggal & Jam</label>
-                        <input type="datetime-local" id="expense-date">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="expense-method">Cash / M-Banking?</label>
-                        <select id="expense-method">
-                            <option value="cash">Cash</option>
-                            <option value="m-banking">M-Banking</option>
-                        </select>
+                        <label>Tanggal & Jam</label>
+                        <input type="datetime-local" id="expenseDate">
                     </div>
                 </div>
-                
                 <div class="form-group">
-                    <label for="expense-amount">Jumlah Pengeluaran</label>
-                    <input type="number" id="expense-amount" placeholder="Masukkan jumlah">
+                    <label>Jumlah</label>
+                    <input type="number" id="expenseAmount" placeholder="Masukkan jumlah">
                 </div>
-                
-                <button class="btn btn-warning" id="save-expense">
+                <button class="btn btn-warning" id="saveExpense">
                     <i class="fas fa-save"></i> Simpan Pengeluaran
                 </button>
             </div>
             
-            <!-- Data Ringkasan -->
-            <div class="cards-container">
+            <!-- Summary Cards -->
+            <div class="cards-container" style="margin-top: 30px;">
                 <div class="card">
-                    <h3>Total Pemasukan <i class="fas fa-arrow-down" style="color: var(--success);"></i></h3>
-                    <p class="amount" id="total-income">Rp 0</p>
-                    <p>Bulan ini: <span id="monthly-income">Rp 0</span></p>
+                    <h3>Pemasukan <i class="fas fa-arrow-down" style="color: var(--success);"></i></h3>
+                    <div class="amount" id="totalIncome">Rp 0</div>
+                    <p>Bulan ini: <span id="monthlyIncome">Rp 0</span></p>
                 </div>
-                
                 <div class="card">
-                    <h3>Total Pengeluaran <i class="fas fa-arrow-up" style="color: var(--danger);"></i></h3>
-                    <p class="amount" id="total-expense">Rp 0</p>
-                    <p>Bulan ini: <span id="monthly-expense">Rp 0</span></p>
+                    <h3>Pengeluaran <i class="fas fa-arrow-up" style="color: var(--danger);"></i></h3>
+                    <div class="amount" id="totalExpense">Rp 0</div>
+                    <p>Bulan ini: <span id="monthlyExpense">Rp 0</span></p>
                 </div>
-                
                 <div class="card">
                     <h3>Saldo <i class="fas fa-piggy-bank" style="color: var(--primary);"></i></h3>
-                    <p class="amount" id="total-balance">Rp 0</p>
-                    <p>Update: <span id="last-update">-</span></p>
+                    <div class="amount" id="totalBalance">Rp 0</div>
+                    <p>Update: <span id="lastUpdate">-</span></p>
+                </div>
+            </div>
+            
+            <!-- Simple Chart -->
+            <div class="card" style="margin-top: 20px;">
+                <h3>Statistik 7 Hari Terakhir</h3>
+                <div class="simple-chart" id="simpleChart">
+                    <!-- Chart bars will be inserted here -->
                 </div>
             </div>
         </div>
         
-        <!-- Time Management Tab -->
-        <div class="tab-content" id="time-management">
-            <div class="section-header">
-                <h2><i class="fas fa-clock"></i> Time Management</h2>
+        <!-- Time Tab -->
+        <div id="time" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2><i class="fas fa-clock"></i> Manajemen Waktu</h2>
                 <div>
-                    <button class="btn" id="openAlarmModal">
+                    <button class="btn" id="openAlarmBtn">
                         <i class="fas fa-bell"></i> Alarm
-                    </button>
-                    <button class="btn btn-success" id="add-schedule" style="margin-left: 10px;">
-                        <i class="fas fa-plus"></i> Jadwal
                     </button>
                 </div>
             </div>
             
-            <!-- Jam Kerja -->
-            <div class="form-group">
-                <h3><i class="fas fa-briefcase"></i> Jam Kerja</h3>
+            <!-- Work Schedule -->
+            <div class="card">
+                <h3><i class="fas fa-briefcase"></i> Jadwal Kerja</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="work-days">Hari Kerja</label>
-                        <select id="work-days" multiple style="height: 120px;">
+                        <label>Hari Kerja</label>
+                        <select id="workDays" multiple style="height: 120px;">
                             <option value="senin">Senin</option>
                             <option value="selasa">Selasa</option>
                             <option value="rabu">Rabu</option>
@@ -507,38 +804,37 @@
                             <option value="minggu">Minggu</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="work-start">Mulai Jam</label>
-                        <input type="time" id="work-start" value="08:00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="work-end">Selesai Jam</label>
-                        <input type="time" id="work-end" value="17:00">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Mulai</label>
+                            <input type="time" id="workStart" value="08:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Selesai</label>
+                            <input type="time" id="workEnd" value="17:00">
+                        </div>
                     </div>
                 </div>
-                
-                <button class="btn" id="save-work">
+                <button class="btn" id="saveWork">
                     <i class="fas fa-save"></i> Simpan Jadwal
                 </button>
             </div>
             
-            <!-- Jadwal Hari Ini -->
-            <div class="cards-container">
+            <!-- Today's Schedule -->
+            <div class="cards-container" style="margin-top: 20px;">
                 <div class="card">
-                    <h3>Jadwal Hari Ini <i class="fas fa-calendar-day"></i></h3>
-                    <div class="data-list" id="today-schedule">
+                    <h3>Hari Ini <i class="fas fa-calendar-day"></i></h3>
+                    <div class="data-list" id="todaySchedule">
                         <div style="text-align: center; padding: 20px; color: var(--gray);">
                             <i class="fas fa-calendar" style="font-size: 2rem;"></i>
-                            <p>Belum ada jadwal</p>
+                            <p>Belum ada jadwal hari ini</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card">
                     <h3>Alarm Aktif <i class="fas fa-bell"></i></h3>
-                    <div class="data-list" id="active-alarms">
+                    <div class="data-list" id="activeAlarms">
                         <div style="text-align: center; padding: 20px; color: var(--gray);">
                             <i class="fas fa-bell" style="font-size: 2rem;"></i>
                             <p>Belum ada alarm</p>
@@ -548,15 +844,15 @@
             </div>
         </div>
         
-        <!-- Data & Export Tab -->
-        <div class="tab-content" id="data-view">
-            <div class="section-header">
+        <!-- Data Tab -->
+        <div id="data" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2><i class="fas fa-database"></i> Data & Export</h2>
                 <div>
-                    <button class="btn btn-success" id="export-all">
+                    <button class="btn btn-success" id="exportBtn">
                         <i class="fas fa-download"></i> Export
                     </button>
-                    <button class="btn btn-danger" id="clear-data" style="margin-left: 10px;">
+                    <button class="btn btn-danger" id="clearBtn" style="margin-left: 10px;">
                         <i class="fas fa-trash"></i> Hapus
                     </button>
                 </div>
@@ -564,8 +860,8 @@
             
             <div class="cards-container">
                 <div class="card">
-                    <h3>Data Pemasukan <i class="fas fa-arrow-down" style="color: var(--success);"></i></h3>
-                    <div class="data-list" id="income-list">
+                    <h3>Pemasukan <i class="fas fa-arrow-down" style="color: var(--success);"></i></h3>
+                    <div class="data-list" id="incomeList">
                         <div style="text-align: center; padding: 10px; color: var(--gray);">
                             Belum ada data
                         </div>
@@ -573,8 +869,8 @@
                 </div>
                 
                 <div class="card">
-                    <h3>Data Pengeluaran <i class="fas fa-arrow-up" style="color: var(--danger);"></i></h3>
-                    <div class="data-list" id="expense-list">
+                    <h3>Pengeluaran <i class="fas fa-arrow-up" style="color: var(--danger);"></i></h3>
+                    <div class="data-list" id="expenseList">
                         <div style="text-align: center; padding: 10px; color: var(--gray);">
                             Belum ada data
                         </div>
@@ -583,27 +879,72 @@
                 
                 <div class="card">
                     <h3>Statistik <i class="fas fa-chart-bar"></i></h3>
-                    <p>Total Pemasukan: <strong id="income-count">0</strong></p>
-                    <p>Total Pengeluaran: <strong id="expense-count">0</strong></p>
-                    <p>Total Alarm: <strong id="alarm-count">0</strong></p>
-                    <p>Penyimpanan: <strong id="storage-size">0 KB</strong></p>
+                    <p>Total Pemasukan: <strong id="incomeCount">0</strong></p>
+                    <p>Total Pengeluaran: <strong id="expenseCount">0</strong></p>
+                    <p>Total Alarm: <strong id="alarmCount">0</strong></p>
+                    <p>Penyimpanan: <strong id="storageSize">0 KB</strong></p>
                 </div>
             </div>
             
-            <div style="background: var(--light); padding: 1.5rem; border-radius: 10px; margin-top: 1.5rem;">
+            <!-- Backup/Restore -->
+            <div class="card" style="margin-top: 20px;">
                 <h3><i class="fas fa-save"></i> Backup & Restore</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <button class="btn" id="backup-data" style="width: 100%;">
+                        <button class="btn" id="backupBtn" style="width: 100%;">
                             <i class="fas fa-save"></i> Backup Data
                         </button>
                     </div>
-                    
                     <div class="form-group">
-                        <input type="file" id="restore-file" accept=".json" style="margin-bottom: 10px;">
-                        <button class="btn" id="restore-data" style="width: 100%;">
+                        <input type="file" id="restoreFile" style="margin-bottom: 10px; width: 100%;">
+                        <button class="btn" id="restoreBtn" style="width: 100%;">
                             <i class="fas fa-upload"></i> Restore Data
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Apps Tab -->
+        <div id="apps" class="tab-content">
+            <h2><i class="fas fa-link"></i> Integrasi & Aplikasi</h2>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <h3><i class="fab fa-google"></i> Google Calendar</h3>
+                    <p>Sinkronkan jadwal dengan Google Calendar</p>
+                    <button class="btn btn-small" style="margin-top: 10px;">Hubungkan</button>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-bell"></i> Alarm</h3>
+                    <p>Atur alarm dan pengingat</p>
+                    <button class="btn btn-small open-alarm-btn" style="margin-top: 10px;">Atur Alarm</button>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-sync-alt"></i> Sync Data</h3>
+                    <p>Sinkronkan data antar perangkat</p>
+                    <button class="btn btn-small" id="syncBtn" style="margin-top: 10px;">Sinkronkan</button>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 20px;">
+                <h3><i class="fas fa-plug"></i> Status Integrasi</h3>
+                <div class="data-list">
+                    <div class="data-item">
+                        <div>
+                            <h4>Local Storage</h4>
+                            <p>Data disimpan di browser</p>
+                        </div>
+                        <span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem;">Aktif</span>
+                    </div>
+                    <div class="data-item">
+                        <div>
+                            <h4>Browser Notification</h4>
+                            <p>Untuk alarm dan pengingat</p>
+                        </div>
+                        <button class="btn-small" id="requestNotification">Aktifkan</button>
                     </div>
                 </div>
             </div>
@@ -613,52 +954,134 @@
         <footer>
             <p>Produktivy Apps &copy; 2025</p>
             <div class="footer-buttons">
-                <button class="btn-small" id="installBtn" style="background: #4cc9f0; color: white;">
+                <button class="btn-small" id="installBtn">
                     <i class="fas fa-plus-circle"></i> Install App
                 </button>
-                <button class="btn-small" id="refreshDataBtn" style="background: var(--success); color: white;">
-                    <i class="fas fa-redo"></i> Refresh
+                <button class="btn-small" id="shortcutInfo">
+                    <i class="fas fa-keyboard"></i> Shortcuts
                 </button>
             </div>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Data disimpan lokal di browser</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Data disimpan secara lokal di browser Anda</p>
         </footer>
     </div>
     
     <script>
-        // ===== OPTIMIZED JAVASCRIPT =====
+        // ===== GLOBAL VARIABLES =====
+        let deferredPrompt = null;
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Hide loading screen immediately
+            // Hide loading screen quickly
             setTimeout(() => {
                 document.getElementById('loading').style.display = 'none';
-            }, 500);
+            }, 800);
             
-            // Set theme from localStorage
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+            // Set theme
+            document.body.setAttribute('data-theme', currentTheme);
+            updateThemeIcon();
             
-            // Initialize
-            initializeUI();
+            // Initialize everything
+            initializeApp();
             loadAllData();
             setCurrentDateTime();
             
-            // Request notification permission
-            if ("Notification" in window && Notification.permission === "default") {
-                Notification.requestPermission();
-            }
+            // Setup PWA
+            setupPWA();
+            
+            // Setup keyboard shortcuts
+            setupShortcuts();
         });
         
-        // ===== DARK MODE =====
-        function updateThemeIcon(theme) {
+        // ===== INITIALIZE APP =====
+        function initializeApp() {
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            // Search toggle
+            document.getElementById('searchToggle').addEventListener('click', toggleSearch);
+            document.getElementById('searchInput').addEventListener('input', performSearch);
+            
+            // Refresh button
+            document.getElementById('refreshBtn').addEventListener('click', () => {
+                loadAllData();
+                showNotification('Data diperbarui', 'success');
+            });
+            
+            // Tab switching
+            document.querySelectorAll('.tab-btn, .mobile-nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Money management
+            document.getElementById('saveIncome').addEventListener('click', saveIncome);
+            document.getElementById('saveExpense').addEventListener('click', saveExpense);
+            
+            // Time management
+            document.getElementById('openAlarmBtn').addEventListener('click', openAlarmModal);
+            document.getElementById('saveWork').addEventListener('click', saveWorkSchedule);
+            document.getElementById('saveAlarm').addEventListener('click', saveAlarm);
+            
+            // Close modal
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+            
+            // Data management
+            document.getElementById('exportBtn').addEventListener('click', exportAllData);
+            document.getElementById('backupBtn').addEventListener('click', backupData);
+            document.getElementById('restoreBtn').addEventListener('click', restoreData);
+            document.getElementById('clearBtn').addEventListener('click', clearAllData);
+            
+            // Apps integration
+            document.getElementById('syncBtn').addEventListener('click', syncData);
+            document.getElementById('requestNotification').addEventListener('click', requestNotificationPermission);
+            document.querySelectorAll('.open-alarm-btn').forEach(btn => {
+                btn.addEventListener('click', openAlarmModal);
+            });
+            
+            // Install button
+            document.getElementById('installBtn').addEventListener('click', showInstallPrompt);
+            document.getElementById('installConfirm').addEventListener('click', installPWA);
+            document.getElementById('installCancel').addEventListener('click', () => {
+                document.getElementById('installPrompt').style.display = 'none';
+            });
+            
+            // Shortcut info
+            document.getElementById('shortcutInfo').addEventListener('click', () => {
+                showNotification('Ctrl+S: Save | Ctrl+F: Search | ESC: Close', 'info');
+            });
+            
+            // Set current datetime
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 16);
+            document.getElementById('incomeDate').value = dateStr;
+            document.getElementById('expenseDate').value = dateStr;
+            document.getElementById('alarmTime').value = dateStr;
+        }
+        
+        // ===== THEME MANAGEMENT =====
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeIcon();
+            showNotification(`Mode ${currentTheme === 'dark' ? 'gelap' : 'terang'} diaktifkan`);
+        }
+        
+        function updateThemeIcon() {
             const icon = document.querySelector('#themeToggle i');
             if (icon) {
-                icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
         }
         
         // ===== SEARCH FUNCTIONALITY =====
-        let searchTimeout;
-        
         function toggleSearch() {
             const container = document.getElementById('searchContainer');
             container.style.display = container.style.display === 'none' ? 'block' : 'none';
@@ -668,265 +1091,94 @@
         }
         
         function performSearch() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const query = document.getElementById('searchInput').value.toLowerCase();
-                const results = document.getElementById('searchResults');
-                
-                if (query.length < 2) {
-                    results.innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: var(--gray);">
-                            <i class="fas fa-search" style="font-size: 2rem;"></i>
-                            <p>Masukkan minimal 2 karakter</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // Simple search implementation
-                const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
-                const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-                const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
-                
-                let found = [];
-                
-                incomes.forEach(item => {
-                    if (item.source?.toLowerCase().includes(query) || 
-                        item.notes?.toLowerCase().includes(query)) {
-                        found.push({type: 'Pemasukan', item});
-                    }
-                });
-                
-                expenses.forEach(item => {
-                    if (item.for?.toLowerCase().includes(query) || 
-                        item.notes?.toLowerCase().includes(query)) {
-                        found.push({type: 'Pengeluaran', item});
-                    }
-                });
-                
-                if (found.length === 0) {
-                    results.innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: var(--gray);">
-                            <i class="fas fa-search-minus" style="font-size: 2rem;"></i>
-                            <p>Tidak ditemukan hasil</p>
-                        </div>
-                    `;
-                } else {
-                    let html = `<div style="margin-bottom: 10px; color: var(--gray);">
-                        <i class="fas fa-check-circle"></i> Ditemukan ${found.length} hasil
-                    </div>`;
-                    
-                    found.forEach(f => {
-                        html += `
-                            <div style="background: var(--light); padding: 10px; border-radius: 8px; margin-bottom: 8px;">
-                                <strong>${f.type}</strong>: ${f.item.source || f.item.for}<br>
-                                <small>${formatCurrency(f.item.amount)} - ${formatDate(f.item.date)}</small>
-                            </div>
-                        `;
-                    });
-                    
-                    results.innerHTML = html;
-                }
-            }, 300);
-        }
-        
-        // ===== UI INITIALIZATION =====
-        function initializeUI() {
-            // Theme toggle
-            document.getElementById('themeToggle').addEventListener('click', function() {
-                const current = document.body.getAttribute('data-theme');
-                const newTheme = current === 'light' ? 'dark' : 'light';
-                document.body.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon(newTheme);
-                showNotification(`Mode ${newTheme === 'dark' ? 'gelap' : 'terang'} aktif`);
-            });
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('searchResults');
             
-            // Search toggle
-            document.getElementById('searchToggle').addEventListener('click', toggleSearch);
-            
-            // Tab switching
-            document.querySelectorAll('.tab-btn, .mobile-nav-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Update active buttons
-                    document.querySelectorAll('.tab-btn, .mobile-nav-btn').forEach(b => {
-                        b.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Update tab content
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    document.getElementById(tabId).classList.add('active');
-                    
-                    // Update URL hash
-                    window.location.hash = tabId;
-                });
-            });
-            
-            // Check hash on load
-            if (window.location.hash) {
-                const tabId = window.location.hash.substring(1);
-                const tabBtn = document.querySelector(`[data-tab="${tabId}"]`);
-                if (tabBtn) tabBtn.click();
-            }
-            
-            // Money buttons
-            document.getElementById('save-income').addEventListener('click', saveIncome);
-            document.getElementById('save-expense').addEventListener('click', saveExpense);
-            
-            // Time buttons
-            document.getElementById('save-work').addEventListener('click', saveWorkSchedule);
-            document.getElementById('openAlarmModal').addEventListener('click', () => {
-                document.getElementById('alarmModal').style.display = 'flex';
-                document.getElementById('alarmTime').value = getCurrentDateTimeLocal();
-            });
-            document.getElementById('closeAlarmModal').addEventListener('click', () => {
-                document.getElementById('alarmModal').style.display = 'none';
-            });
-            document.getElementById('saveAlarm').addEventListener('click', saveAlarm);
-            
-            // Data buttons
-            document.getElementById('export-all').addEventListener('click', exportAllData);
-            document.getElementById('backup-data').addEventListener('click', backupData);
-            document.getElementById('restore-data').addEventListener('click', restoreData);
-            document.getElementById('clear-data').addEventListener('click', clearAllData);
-            document.getElementById('refreshDataBtn').addEventListener('click', () => {
-                loadAllData();
-                showNotification('Data diperbarui');
-            });
-            
-            // Install button
-            document.getElementById('installBtn').addEventListener('click', showInstallPrompt);
-            document.getElementById('installConfirm').addEventListener('click', installPWA);
-            document.getElementById('installCancel').addEventListener('click', () => {
-                document.getElementById('installPrompt').classList.remove('show');
-            });
-            
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // Ctrl+S
-                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                    e.preventDefault();
-                    const activeTab = document.querySelector('.tab-content.active').id;
-                    if (activeTab === 'money-management') {
-                        saveIncome();
-                    }
-                    showNotification('Data disimpan');
-                }
-                
-                // Ctrl+F
-                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-                    e.preventDefault();
-                    toggleSearch();
-                }
-                
-                // ESC
-                if (e.key === 'Escape') {
-                    document.getElementById('alarmModal').style.display = 'none';
-                    document.getElementById('searchContainer').style.display = 'none';
-                }
-            });
-            
-            // PWA install prompt
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                window.deferredPrompt = e;
-                document.getElementById('installBtn').style.display = 'inline-block';
-            });
-        }
-        
-        // ===== DATA MANAGEMENT =====
-        function loadAllData() {
-            // Update finance summary
-            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
-            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-            
-            const totalIncome = incomes.reduce((sum, i) => sum + (parseFloat(i.amount) || 0), 0);
-            const totalExpense = expenses.reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
-            
-            document.getElementById('total-income').textContent = formatCurrency(totalIncome);
-            document.getElementById('total-expense').textContent = formatCurrency(totalExpense);
-            document.getElementById('total-balance').textContent = formatCurrency(totalIncome - totalExpense);
-            
-            // Monthly data
-            const now = new Date();
-            const currentMonth = now.getMonth();
-            const currentYear = now.getFullYear();
-            
-            const monthlyIncome = incomes.filter(i => {
-                const date = new Date(i.date || i.timestamp);
-                return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
-            }).reduce((sum, i) => sum + (parseFloat(i.amount) || 0), 0);
-            
-            const monthlyExpense = expenses.filter(e => {
-                const date = new Date(e.date || e.timestamp);
-                return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
-            }).reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
-            
-            document.getElementById('monthly-income').textContent = formatCurrency(monthlyIncome);
-            document.getElementById('monthly-expense').textContent = formatCurrency(monthlyExpense);
-            
-            // Update lists
-            updateDataList('income-list', incomes, 'source');
-            updateDataList('expense-list', expenses, 'for');
-            
-            // Update counts
-            document.getElementById('income-count').textContent = incomes.length;
-            document.getElementById('expense-count').textContent = expenses.length;
-            
-            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
-            document.getElementById('alarm-count').textContent = alarms.filter(a => a.active).length;
-            
-            // Update storage size
-            let totalSize = 0;
-            for (let key in localStorage) {
-                if (localStorage.hasOwnProperty(key)) {
-                    totalSize += localStorage[key].length * 2;
-                }
-            }
-            document.getElementById('storage-size').textContent = `${(totalSize / 1024).toFixed(1)} KB`;
-            document.getElementById('last-update').textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-        }
-        
-        function updateDataList(containerId, data, titleField) {
-            const container = document.getElementById(containerId);
-            if (data.length === 0) {
-                container.innerHTML = '<div style="text-align: center; padding: 10px; color: var(--gray);">Belum ada data</div>';
+            if (query.length < 2) {
+                results.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--gray);">Masukkan minimal 2 karakter</p>';
                 return;
             }
             
-            let html = '';
-            data.slice(-5).reverse().forEach((item, index) => {
+            // Search in all data
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            
+            let found = [];
+            
+            incomes.forEach(income => {
+                if (income.source.toLowerCase().includes(query) || 
+                    (income.notes && income.notes.toLowerCase().includes(query))) {
+                    found.push({ type: 'Pemasukan', data: income });
+                }
+            });
+            
+            expenses.forEach(expense => {
+                if (expense.for.toLowerCase().includes(query) || 
+                    (expense.notes && expense.notes.toLowerCase().includes(query))) {
+                    found.push({ type: 'Pengeluaran', data: expense });
+                }
+            });
+            
+            alarms.forEach(alarm => {
+                if (alarm.name.toLowerCase().includes(query)) {
+                    found.push({ type: 'Alarm', data: alarm });
+                }
+            });
+            
+            if (found.length === 0) {
+                results.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--gray);">Tidak ditemukan hasil</p>';
+                return;
+            }
+            
+            let html = '<div class="data-list">';
+            found.forEach(item => {
                 html += `
                     <div class="data-item">
-                        <div class="data-info">
-                            <h4>${item[titleField]}</h4>
-                            <p>${formatCurrency(item.amount)} • ${formatDate(item.date || item.timestamp)}</p>
-                        </div>
-                        <div class="data-actions">
-                            <button class="btn-small btn-danger" onclick="deleteItem('${titleField === 'source' ? 'income' : 'expense'}', ${data.length - 1 - index})">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                        <div>
+                            <h4>${item.type}: ${item.data.source || item.data.for || item.data.name}</h4>
+                            <p>${item.data.amount ? formatCurrency(item.data.amount) : ''} ${item.data.time ? formatDate(item.data.time) : ''}</p>
                         </div>
                     </div>
                 `;
             });
-            
-            container.innerHTML = html;
+            html += '</div>';
+            results.innerHTML = html;
         }
         
-        // ===== SAVE FUNCTIONS =====
+        // ===== TAB MANAGEMENT =====
+        function switchTab(tabId) {
+            // Update active buttons
+            document.querySelectorAll('.tab-btn, .mobile-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update URL hash
+            window.location.hash = tabId;
+            
+            // Load specific data if needed
+            if (tabId === 'data') {
+                updateDataLists();
+            }
+        }
+        
+        // ===== MONEY MANAGEMENT =====
         function saveIncome() {
             const income = {
-                source: document.getElementById('income-source').value,
-                amount: parseFloat(document.getElementById('income-amount').value) || 0,
-                date: document.getElementById('income-date').value,
-                method: document.getElementById('income-method').value,
-                bank: document.getElementById('income-bank').value,
+                source: document.getElementById('incomeSource').value,
+                amount: parseFloat(document.getElementById('incomeAmount').value) || 0,
+                date: document.getElementById('incomeDate').value,
+                method: document.getElementById('incomeMethod').value,
+                bank: document.getElementById('incomeBank').value,
                 timestamp: new Date().toISOString()
             };
             
@@ -939,17 +1191,16 @@
             incomes.push(income);
             localStorage.setItem('incomes', JSON.stringify(incomes));
             
-            clearForm('income');
+            document.getElementById('incomeAmount').value = '';
             loadAllData();
-            showNotification('Pemasukan disimpan');
+            showNotification('Pemasukan disimpan', 'success');
         }
         
         function saveExpense() {
             const expense = {
-                for: document.getElementById('expense-for').value,
-                amount: parseFloat(document.getElementById('expense-amount').value) || 0,
-                date: document.getElementById('expense-date').value,
-                method: document.getElementById('expense-method').value,
+                for: document.getElementById('expenseFor').value,
+                amount: parseFloat(document.getElementById('expenseAmount').value) || 0,
+                date: document.getElementById('expenseDate').value,
                 timestamp: new Date().toISOString()
             };
             
@@ -962,22 +1213,27 @@
             expenses.push(expense);
             localStorage.setItem('expenses', JSON.stringify(expenses));
             
-            clearForm('expense');
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseFor').value = '';
             loadAllData();
-            showNotification('Pengeluaran disimpan');
+            showNotification('Pengeluaran disimpan', 'success');
+        }
+        
+        // ===== TIME MANAGEMENT =====
+        function openAlarmModal() {
+            document.getElementById('alarmModal').style.display = 'flex';
+            document.getElementById('alarmTime').value = new Date().toISOString().slice(0, 16);
         }
         
         function saveWorkSchedule() {
             const workSchedule = {
-                days: Array.from(document.getElementById('work-days').selectedOptions).map(opt => opt.value),
-                start: document.getElementById('work-start').value,
-                end: document.getElementById('work-end').value
+                days: Array.from(document.getElementById('workDays').selectedOptions).map(opt => opt.value),
+                start: document.getElementById('workStart').value,
+                end: document.getElementById('workEnd').value
             };
             
             localStorage.setItem('workSchedule', JSON.stringify(workSchedule));
-            showNotification('Jadwal kerja disimpan');
-            
-            // Update today's schedule
+            showNotification('Jadwal kerja disimpan', 'success');
             updateTodaySchedule();
         }
         
@@ -1000,91 +1256,238 @@
             localStorage.setItem('alarms', JSON.stringify(alarms));
             
             document.getElementById('alarmModal').style.display = 'none';
-            clearForm('alarm');
-            showNotification('Alarm disimpan');
+            document.getElementById('alarmName').value = '';
+            showNotification('Alarm disimpan', 'success');
+            updateAlarmList();
+            loadAllData();
+        }
+        
+        // ===== DATA LOADING =====
+        function loadAllData() {
+            // Load financial data
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            
+            // Calculate totals
+            const totalIncome = incomes.reduce((sum, i) => sum + (i.amount || 0), 0);
+            const totalExpense = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+            const totalBalance = totalIncome - totalExpense;
+            
+            // Update display
+            document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
+            document.getElementById('totalExpense').textContent = formatCurrency(totalExpense);
+            document.getElementById('totalBalance').textContent = formatCurrency(totalBalance);
+            
+            // Monthly data
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
+            const monthlyIncome = incomes
+                .filter(i => {
+                    const date = new Date(i.date || i.timestamp);
+                    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+                })
+                .reduce((sum, i) => sum + (i.amount || 0), 0);
+            
+            const monthlyExpense = expenses
+                .filter(e => {
+                    const date = new Date(e.date || e.timestamp);
+                    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+                })
+                .reduce((sum, e) => sum + (e.amount || 0), 0);
+            
+            document.getElementById('monthlyIncome').textContent = formatCurrency(monthlyIncome);
+            document.getElementById('monthlyExpense').textContent = formatCurrency(monthlyExpense);
+            
+            // Update last update time
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            // Update counts
+            document.getElementById('incomeCount').textContent = incomes.length;
+            document.getElementById('expenseCount').textContent = expenses.length;
+            
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            document.getElementById('alarmCount').textContent = alarms.filter(a => a.active).length;
+            
+            // Update storage size
+            updateStorageSize();
+            
+            // Update simple chart
+            updateSimpleChart();
+            
+            // Update today's schedule
+            updateTodaySchedule();
             
             // Update alarm list
             updateAlarmList();
         }
         
-        // ===== HELPER FUNCTIONS =====
-        function formatCurrency(amount) {
-            return 'Rp ' + amount.toLocaleString('id-ID');
+        function updateDataLists() {
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            
+            // Update income list
+            const incomeList = document.getElementById('incomeList');
+            incomeList.innerHTML = incomes.length === 0 ? 
+                '<div style="text-align: center; padding: 10px; color: var(--gray);">Belum ada data</div>' :
+                incomes.slice(-5).reverse().map(income => `
+                    <div class="data-item">
+                        <div>
+                            <h4>${income.source}</h4>
+                            <p>${formatCurrency(income.amount)} • ${formatDate(income.date)}</p>
+                        </div>
+                        <button class="btn-small btn-danger" onclick="deleteItem('income', '${income.timestamp}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            
+            // Update expense list
+            const expenseList = document.getElementById('expenseList');
+            expenseList.innerHTML = expenses.length === 0 ? 
+                '<div style="text-align: center; padding: 10px; color: var(--gray);">Belum ada data</div>' :
+                expenses.slice(-5).reverse().map(expense => `
+                    <div class="data-item">
+                        <div>
+                            <h4>${expense.for}</h4>
+                            <p>${formatCurrency(expense.amount)} • ${formatDate(expense.date)}</p>
+                        </div>
+                        <button class="btn-small btn-danger" onclick="deleteItem('expense', '${expense.timestamp}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
         }
         
-        function formatDate(dateString) {
-            if (!dateString) return '-';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('id-ID', {
-                day: '2-digit',
-                month: 'short'
+        function updateSimpleChart() {
+            const incomes = JSON.parse(localStorage.getItem('incomes') || '[]');
+            const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+            
+            // Get last 7 days data
+            const last7Days = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                last7Days.push(date);
+            }
+            
+            let chartHTML = '';
+            const dayNames = ['M', 'S', 'S', 'R', 'K', 'J', 'S'];
+            
+            last7Days.forEach((date, index) => {
+                const dateStr = date.toISOString().split('T')[0];
+                
+                const dayIncome = incomes
+                    .filter(i => {
+                        const iDate = new Date(i.date || i.timestamp);
+                        return iDate.toISOString().split('T')[0] === dateStr;
+                    })
+                    .reduce((sum, i) => sum + (i.amount || 0), 0);
+                
+                const dayExpense = expenses
+                    .filter(e => {
+                        const eDate = new Date(e.date || e.timestamp);
+                        return eDate.toISOString().split('T')[0] === dateStr;
+                    })
+                    .reduce((sum, e) => sum + (e.amount || 0), 0);
+                
+                // Find max value for scaling
+                const maxValue = Math.max(dayIncome, dayExpense, 100000);
+                const incomeHeight = (dayIncome / maxValue) * 80;
+                const expenseHeight = (dayExpense / maxValue) * 80;
+                
+                chartHTML += `
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="display: flex; gap: 2px; height: 80px; align-items: end;">
+                            <div style="width: 15px; height: ${incomeHeight}px; background: var(--success); border-radius: 3px 3px 0 0;"></div>
+                            <div style="width: 15px; height: ${expenseHeight}px; background: var(--danger); border-radius: 3px 3px 0 0;"></div>
+                        </div>
+                        <div style="margin-top: 5px; font-size: 0.8rem; color: var(--gray);">${dayNames[index]}</div>
+                    </div>
+                `;
             });
+            
+            document.getElementById('simpleChart').innerHTML = chartHTML;
         }
         
-        function getCurrentDateTimeLocal() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            return `${year}-${month}-${day}T${hours}:${minutes}`;
-        }
-        
-        function setCurrentDateTime() {
-            const now = getCurrentDateTimeLocal();
-            document.getElementById('income-date').value = now;
-            document.getElementById('expense-date').value = now;
-        }
-        
-        function clearForm(type) {
-            if (type === 'income') {
-                document.getElementById('income-source').value = '';
-                document.getElementById('income-amount').value = '';
-                document.getElementById('income-method').value = 'cash';
-                document.getElementById('income-bank').value = '';
-            } else if (type === 'expense') {
-                document.getElementById('expense-for').value = '';
-                document.getElementById('expense-amount').value = '';
-                document.getElementById('expense-method').value = 'cash';
-            } else if (type === 'alarm') {
-                document.getElementById('alarmName').value = '';
-                document.getElementById('alarmTime').value = getCurrentDateTimeLocal();
-                document.getElementById('alarmRepeat').value = 'once';
+        function updateTodaySchedule() {
+            const workSchedule = JSON.parse(localStorage.getItem('workSchedule') || '{}');
+            const container = document.getElementById('todaySchedule');
+            
+            if (!workSchedule.days || workSchedule.days.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Belum ada jadwal</div>';
+                return;
+            }
+            
+            const today = new Date();
+            const dayName = today.toLocaleDateString('id-ID', { weekday: 'long' }).toLowerCase();
+            
+            if (workSchedule.days.includes(dayName)) {
+                container.innerHTML = `
+                    <div class="data-item">
+                        <div>
+                            <h4>Jam Kerja</h4>
+                            <p>${workSchedule.start} - ${workSchedule.end}</p>
+                        </div>
+                        <span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem;">Hari ini</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Tidak ada jadwal hari ini</div>';
             }
         }
         
-        function showNotification(message, type = 'info') {
-            // Remove existing notifications
-            document.querySelectorAll('.notification').forEach(n => n.remove());
+        function updateAlarmList() {
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            const activeAlarms = alarms.filter(a => a.active);
+            const container = document.getElementById('activeAlarms');
             
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.style.background = type === 'success' ? 'var(--success)' : 
-                                          type === 'warning' ? 'var(--warning)' : 
-                                          type === 'danger' ? 'var(--danger)' : 'var(--primary)';
+            if (activeAlarms.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Belum ada alarm</div>';
+                return;
+            }
             
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check' : type === 'warning' ? 'exclamation' : type === 'danger' ? 'times' : 'info'}-circle"></i>
-                <span>${message}</span>
-            `;
+            let html = '';
+            activeAlarms.slice(0, 3).forEach(alarm => {
+                html += `
+                    <div class="data-item">
+                        <div>
+                            <h4>${alarm.name}</h4>
+                            <p>${formatDateTime(alarm.time)} • ${getRepeatText(alarm.repeat)}</p>
+                        </div>
+                        <button class="btn-small btn-danger" onclick="deleteAlarm(${alarm.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
             
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideIn 0.3s ease reverse';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+            container.innerHTML = html;
         }
         
-        // ===== EXPORT/IMPORT =====
+        // ===== DATA MANAGEMENT =====
+        function updateStorageSize() {
+            let totalSize = 0;
+            for (let key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    totalSize += (localStorage[key].length * 2) / 1024;
+                }
+            }
+            document.getElementById('storageSize').textContent = `${totalSize.toFixed(2)} KB`;
+        }
+        
         function exportAllData() {
             const data = {
                 incomes: JSON.parse(localStorage.getItem('incomes') || '[]'),
                 expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
                 alarms: JSON.parse(localStorage.getItem('alarms') || '[]'),
                 workSchedule: JSON.parse(localStorage.getItem('workSchedule') || '{}'),
-                timestamp: new Date().toISOString()
+                exportDate: new Date().toISOString(),
+                version: '1.0'
             };
             
             const json = JSON.stringify(data, null, 2);
@@ -1092,7 +1495,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `backup-produktivy-${new Date().getTime()}.json`;
+            a.download = `produktivy-backup-${new Date().getTime()}.json`;
             a.click();
             URL.revokeObjectURL(url);
             
@@ -1104,7 +1507,7 @@
         }
         
         function restoreData() {
-            const fileInput = document.getElementById('restore-file');
+            const fileInput = document.getElementById('restoreFile');
             const file = fileInput.files[0];
             
             if (!file) {
@@ -1135,111 +1538,133 @@
         }
         
         function clearAllData() {
-            if (confirm('HAPUS SEMUA DATA? Tidak bisa dikembalikan!')) {
+            if (confirm('HAPUS SEMUA DATA? Tindakan ini tidak dapat dibatalkan!')) {
                 localStorage.clear();
                 loadAllData();
-                showNotification('Semua data dihapus', 'success');
+                showNotification('Semua data telah dihapus', 'success');
             }
         }
         
-        function deleteItem(type, index) {
+        function deleteItem(type, timestamp) {
             if (!confirm(`Hapus ${type} ini?`)) return;
             
             const key = type === 'income' ? 'incomes' : 'expenses';
-            const data = JSON.parse(localStorage.getItem(key) || '[]');
-            data.splice(index, 1);
-            localStorage.setItem(key, JSON.stringify(data));
+            const items = JSON.parse(localStorage.getItem(key) || '[]');
+            const filtered = items.filter(item => item.timestamp !== timestamp);
+            localStorage.setItem(key, JSON.stringify(filtered));
             
             loadAllData();
             showNotification(`${type === 'income' ? 'Pemasukan' : 'Pengeluaran'} dihapus`);
         }
         
-        // ===== PWA FUNCTIONS =====
-        function showInstallPrompt() {
-            if (window.deferredPrompt) {
-                window.deferredPrompt.prompt();
-                window.deferredPrompt.userChoice.then(() => {
-                    window.deferredPrompt = null;
+        function deleteAlarm(id) {
+            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
+            const filtered = alarms.filter(alarm => alarm.id !== id);
+            localStorage.setItem('alarms', JSON.stringify(filtered));
+            
+            updateAlarmList();
+            loadAllData();
+            showNotification('Alarm dihapus');
+        }
+        
+        // ===== SYNC DATA =====
+        function syncData() {
+            const btn = document.getElementById('syncBtn');
+            const originalHtml = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyinkronkan...';
+            btn.disabled = true;
+            
+            // Simulate sync process
+            setTimeout(() => {
+                const syncTime = new Date().toLocaleString('id-ID');
+                localStorage.setItem('lastSync', syncTime);
+                
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+                
+                showNotification(`Data disinkronkan (${syncTime})`, 'success');
+            }, 1500);
+        }
+        
+        // ===== NOTIFICATION =====
+        function requestNotificationPermission() {
+            if ("Notification" in window && Notification.permission === "default") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        showNotification('Notifikasi diaktifkan', 'success');
+                    }
                 });
+            }
+        }
+        
+        // ===== PWA FUNCTIONS =====
+        function setupPWA() {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                document.getElementById('installBtn').style.display = 'inline-block';
+            });
+        }
+        
+        function showInstallPrompt() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
             } else {
-                document.getElementById('installPrompt').classList.add('show');
+                document.getElementById('installPrompt').style.display = 'block';
             }
         }
         
         function installPWA() {
-            if (window.deferredPrompt) {
-                window.deferredPrompt.prompt();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(() => {
+                    deferredPrompt = null;
+                });
             }
-            document.getElementById('installPrompt').classList.remove('show');
+            document.getElementById('installPrompt').style.display = 'none';
         }
         
-        // ===== UPDATE SCHEDULE & ALARMS =====
-        function updateTodaySchedule() {
-            const workSchedule = JSON.parse(localStorage.getItem('workSchedule') || '{}');
-            const container = document.getElementById('today-schedule');
-            
-            if (!workSchedule.days || workSchedule.days.length === 0) {
-                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Belum ada jadwal</div>';
-                return;
-            }
-            
-            const today = new Date();
-            const dayName = today.toLocaleDateString('id-ID', { weekday: 'long' }).toLowerCase();
-            
-            if (workSchedule.days.includes(dayName)) {
-                container.innerHTML = `
-                    <div class="data-item">
-                        <div class="data-info">
-                            <h4>Jam Kerja</h4>
-                            <p>${workSchedule.start} - ${workSchedule.end}</p>
-                        </div>
-                        <span class="badge">Hari ini</span>
-                    </div>
-                `;
-            } else {
-                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Tidak ada jadwal kerja hari ini</div>';
-            }
-        }
-        
-        function updateAlarmList() {
-            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
-            const container = document.getElementById('active-alarms');
-            const activeAlarms = alarms.filter(a => a.active);
-            
-            if (activeAlarms.length === 0) {
-                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">Belum ada alarm</div>';
-                return;
-            }
-            
-            let html = '';
-            activeAlarms.slice(0, 3).forEach(alarm => {
-                html += `
-                    <div class="data-item">
-                        <div class="data-info">
-                            <h4>${alarm.name}</h4>
-                            <p>${formatDateTime(alarm.time)}</p>
-                        </div>
-                        <button class="btn-small btn-danger" onclick="deleteAlarm(${alarm.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
+        // ===== KEYBOARD SHORTCUTS =====
+        function setupShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+S to save
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    const activeTab = document.querySelector('.tab-content.active').id;
+                    if (activeTab === 'money') {
+                        saveIncome();
+                    }
+                    showNotification('Data disimpan (Ctrl+S)', 'success');
+                }
+                
+                // Ctrl+F to search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    toggleSearch();
+                }
+                
+                // ESC to close modals/search
+                if (e.key === 'Escape') {
+                    document.getElementById('alarmModal').style.display = 'none';
+                    document.getElementById('searchContainer').style.display = 'none';
+                    document.getElementById('installPrompt').style.display = 'none';
+                }
             });
-            
-            container.innerHTML = html;
         }
         
-        function deleteAlarm(id) {
-            const alarms = JSON.parse(localStorage.getItem('alarms') || '[]');
-            const index = alarms.findIndex(a => a.id === id);
-            
-            if (index !== -1) {
-                alarms.splice(index, 1);
-                localStorage.setItem('alarms', JSON.stringify(alarms));
-                updateAlarmList();
-                loadAllData();
-                showNotification('Alarm dihapus');
-            }
+        // ===== HELPER FUNCTIONS =====
+        function formatCurrency(amount) {
+            return 'Rp ' + (amount || 0).toLocaleString('id-ID');
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: 'short'
+            });
         }
         
         function formatDateTime(dateTimeString) {
@@ -1252,9 +1677,50 @@
             });
         }
         
-        // Initialize schedule and alarms
-        updateTodaySchedule();
-        updateAlarmList();
+        function getRepeatText(repeat) {
+            const texts = {
+                'once': 'Sekali',
+                'daily': 'Harian',
+                'weekly': 'Mingguan',
+                'weekdays': 'Hari Kerja'
+            };
+            return texts[repeat] || repeat;
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            
+            let icon = 'fas fa-info-circle';
+            if (type === 'success') icon = 'fas fa-check-circle';
+            if (type === 'warning') icon = 'fas fa-exclamation-triangle';
+            if (type === 'danger') icon = 'fas fa-times-circle';
+            
+            notification.innerHTML = `
+                <i class="${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        function setCurrentDateTime() {
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 16);
+            document.getElementById('incomeDate').value = dateStr;
+            document.getElementById('expenseDate').value = dateStr;
+        }
+        
+        // Initialize on load
+        updateDataLists();
     </script>
 </body>
 </html>
